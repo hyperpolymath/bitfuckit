@@ -1,0 +1,89 @@
+= bitfuckit
+:toc:
+:toclevels: 2
+
+Bitbucket CLI tool written in Ada.
+
+== Features
+
+* `auth login` - Authenticate with Bitbucket app password
+* `auth status` - Show authentication status
+* `repo create` - Create a new repository
+* `repo list` - List all repositories
+* `repo delete` - Delete a repository
+* `repo exists` - Check if repository exists
+* `mirror` - Mirror a repository from GitHub to Bitbucket
+
+== Installation
+
+=== Prerequisites
+
+* GNAT (Ada compiler) - `sudo dnf install gcc-gnat`
+* GPRbuild - `sudo dnf install gprbuild`
+* curl - Usually pre-installed
+
+=== Build
+
+[source,bash]
+----
+gprbuild -P bitfuckit.gpr
+----
+
+The binary will be in `bin/bitfuckit`.
+
+=== Install
+
+[source,bash]
+----
+cp bin/bitfuckit ~/.local/bin/
+----
+
+== Usage
+
+=== Authentication
+
+Get an app password from https://bitbucket.org/account/settings/app-passwords/
+
+Required permissions: `repository:write`, `repository:read`, `repository:delete`
+
+[source,bash]
+----
+bitfuckit auth login
+# Enter username, app password, and workspace
+----
+
+=== Repository Operations
+
+[source,bash]
+----
+# Create a repository
+bitfuckit repo create my-new-repo
+bitfuckit repo create my-private-repo --private
+bitfuckit repo create my-repo --description "My awesome project"
+
+# List repositories
+bitfuckit repo list
+
+# Check if repository exists
+bitfuckit repo exists my-repo
+
+# Delete repository
+bitfuckit repo delete my-repo
+----
+
+=== Mirroring from GitHub
+
+[source,bash]
+----
+# From within a git repository
+bitfuckit mirror my-repo
+# This will create the repo on Bitbucket if needed and push all branches
+----
+
+== Configuration
+
+Credentials are stored in `~/.config/bitfuckit/config`
+
+== License
+
+SPDX-License-Identifier: AGPL-3.0-or-later

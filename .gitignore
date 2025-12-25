@@ -1,0 +1,15 @@
+# Ada build artifacts
+obj/
+bin/
+*.ali
+*.o
+
+# Alire
+alire/
+config/
+
+# Editor
+*~
+*.swp
+.vscode/
+.idea/
