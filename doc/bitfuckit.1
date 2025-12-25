@@ -1,0 +1,101 @@
+.\" SPDX-License-Identifier: AGPL-3.0-or-later
+.TH BITFUCKIT 1 "December 2025" "bitfuckit 0.1.0" "User Commands"
+.SH NAME
+bitfuckit \- Bitbucket CLI tool
+.SH SYNOPSIS
+.B bitfuckit
+[\fIcommand\fR] [\fIsubcommand\fR] [\fIoptions\fR]
+.SH DESCRIPTION
+.B bitfuckit
+is a command-line interface for Bitbucket Cloud, written in Ada.
+It provides repository management, authentication, and mirroring capabilities.
+.PP
+When invoked without arguments, launches the interactive TUI mode.
+.SH COMMANDS
+.TP
+.B auth login
+Authenticate with Bitbucket using an app password.
+Prompts for username, app password, and workspace.
+.TP
+.B auth status
+Show current authentication status and configuration.
+.TP
+.B repo create \fIname\fR [\-\-private] [\-\-description \fItext\fR]
+Create a new repository with the given name.
+.TP
+.B repo list
+List all repositories in the configured workspace.
+.TP
+.B repo delete \fIname\fR
+Delete a repository (requires confirmation).
+.TP
+.B repo exists \fIname\fR
+Check if a repository exists.
+.TP
+.B mirror \fIname\fR
+Mirror the current git repository to Bitbucket.
+Creates the repository if it doesn't exist, then pushes all branches.
+.TP
+.B tui
+Launch the interactive terminal user interface.
+.TP
+.B help, \-\-help, \-h
+Show usage information.
+.SH OPTIONS
+.TP
+.B \-\-private
+When creating a repository, make it private.
+.TP
+.B \-\-description \fItext\fR
+When creating a repository, set its description.
+.SH FILES
+.TP
+.I ~/.config/bitfuckit/config
+Configuration file storing credentials.
+.SH TUI CONTROLS
+.TP
+.B j, Down Arrow
+Move selection down.
+.TP
+.B k, Up Arrow
+Move selection up.
+.TP
+.B Enter
+Select current item.
+.TP
+.B q, Escape
+Quit.
+.SH ENVIRONMENT
+.TP
+.B XDG_CONFIG_HOME
+If set, configuration is stored in $XDG_CONFIG_HOME/bitfuckit/
+instead of ~/.config/bitfuckit/.
+.SH EXIT STATUS
+.TP
+.B 0
+Success.
+.TP
+.B 1
+Error (authentication failure, API error, etc.).
+.SH EXAMPLES
+.TP
+Authenticate with Bitbucket:
+.B bitfuckit auth login
+.TP
+Create a private repository:
+.B bitfuckit repo create my-project \-\-private
+.TP
+Mirror current repo to Bitbucket:
+.B bitfuckit mirror my-project
+.SH SEE ALSO
+.BR git (1),
+.BR gh (1),
+.BR glab (1),
+.BR tea (1)
+.SH BUGS
+Report bugs at: https://github.com/hyperpolymath/bitfuckit/issues
+.SH AUTHOR
+hyperpolymath
+.SH COPYRIGHT
+Copyright (C) 2025 hyperpolymath.
+License: AGPL-3.0-or-later.

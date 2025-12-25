@@ -1,0 +1,73 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= Contributing to bitfuckit
+
+Thanks for your interest in contributing!
+
+== Getting Started
+
+. Fork the repository
+. Clone your fork:
++
+[source,bash]
+----
+git clone https://github.com/YOUR_USERNAME/bitfuckit.git
+cd bitfuckit
+----
+
+. Install dependencies:
++
+[source,bash]
+----
+# Fedora
+sudo dnf install gcc-gnat gprbuild
+
+# Debian/Ubuntu
+sudo apt install gnat gprbuild
+----
+
+. Build:
++
+[source,bash]
+----
+gprbuild -P bitfuckit.gpr
+----
+
+== Code Style
+
+* Ada 2012 style guide
+* 3-space indentation
+* SPDX license header on all source files
+* Use SPARK Mode where possible for specification files
+
+== Submitting Changes
+
+. Create a feature branch:
++
+[source,bash]
+----
+git checkout -b feature/my-feature
+----
+
+. Make your changes
+. Ensure the build succeeds:
++
+[source,bash]
+----
+gprbuild -P bitfuckit.gpr
+bin/bitfuckit --help
+----
+
+. Commit with a descriptive message
+. Push and create a pull request
+
+== Adding New Commands
+
+. Add the command handling in `src/bitfuckit.adb`
+. If API calls needed, add to `src/bitbucket_api.adb`
+. Update the help text in `Print_Usage`
+. Add shell completions in `completions/`
+. Update the man page in `doc/bitfuckit.1`
+
+== Questions?
+
+Open an issue at https://github.com/hyperpolymath/bitfuckit/issues

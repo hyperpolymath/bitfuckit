@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# mustfile for bitfuckit - declarative build requirements
+
+[project]
+name = "bitfuckit"
+version = "0.1.0"
+license = "AGPL-3.0-or-later"
+
+[build]
+system = "gprbuild"
+file = "bitfuckit.gpr"
+output = "bin/bitfuckit"
+
+[build.commands]
+default = "gprbuild -P bitfuckit.gpr"
+release = "gprbuild -P bitfuckit.gpr -XBUILD_MODE=release"
+clean = "gprclean -P bitfuckit.gpr"
+verify = "gnatprove -P bitfuckit.gpr --mode=check"
+
+[install]
+binary = { src = "bin/bitfuckit", dest = "~/.local/bin/bitfuckit" }
+man = { src = "doc/bitfuckit.1", dest = "/usr/share/man/man1/bitfuckit.1" }
+
+[install.completions]
+bash = { src = "completions/bitfuckit.bash", dest = "/usr/share/bash-completion/completions/bitfuckit" }
+zsh = { src = "completions/bitfuckit.zsh", dest = "/usr/share/zsh/site-functions/_bitfuckit" }
+fish = { src = "completions/bitfuckit.fish", dest = "/usr/share/fish/vendor_completions.d/bitfuckit.fish" }
+
+[dependencies.build]
+gnat = ">= 12"
+gprbuild = ">= 22"
+
+[dependencies.runtime]
+curl = ">= 7"
+
+[test]
+smoke = "bin/bitfuckit --help"
+
+[package]
+formats = ["rpm", "deb", "flatpak", "nix", "homebrew"]
+
+[package.rpm]
+name = "bitfuckit"
+release = "1"
+requires = ["curl"]
+build_requires = ["gcc-gnat", "gprbuild"]
+
+[package.deb]
+name = "bitfuckit"
+section = "devel"
+depends = ["curl"]
+build-depends = ["gnat", "gprbuild"]

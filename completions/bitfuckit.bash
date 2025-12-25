@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Bash completion for bitfuckit
+
+_bitfuckit() {
+    local cur prev words cword
+    _init_completion || return
+
+    local commands="auth repo mirror tui help"
+    local auth_cmds="login status"
+    local repo_cmds="create list delete exists"
+
+    case $cword in
+        1)
+            COMPREPLY=($(compgen -W "$commands" -- "$cur"))
+            ;;
+        2)
+            case ${words[1]} in
+                auth)
+                    COMPREPLY=($(compgen -W "$auth_cmds" -- "$cur"))
+                    ;;
+                repo)
+                    COMPREPLY=($(compgen -W "$repo_cmds" -- "$cur"))
+                    ;;
+            esac
+            ;;
+        *)
+            case ${words[1]} in
+                repo)
+                    case ${words[2]} in
+                        create)
+                            COMPREPLY=($(compgen -W "--private --description" -- "$cur"))
+                            ;;
+                    esac
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+complete -F _bitfuckit bitfuckit
