@@ -13,15 +13,18 @@ with Ada.Command_Line; use Ada.Command_Line;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Config;
 with Bitbucket_API;
+with TUI;
 with GNAT.OS_Lib;
 
 procedure Bitfuckit is
 
    procedure Print_Usage is
    begin
-      Put_Line ("bitfuckit - Bitbucket CLI tool");
+      Put_Line ("bitfuckit - Bitbucket CLI tool in Ada/SPARK");
       Put_Line ("");
       Put_Line ("Usage:");
+      Put_Line ("  bitfuckit                         Launch TUI interface");
+      Put_Line ("  bitfuckit tui                     Launch TUI interface");
       Put_Line ("  bitfuckit auth login              Login with app password");
       Put_Line ("  bitfuckit auth status             Show auth status");
       Put_Line ("  bitfuckit repo create <name>      Create repository");
@@ -314,7 +317,7 @@ procedure Bitfuckit is
 
 begin
    if Argument_Count = 0 then
-      Print_Usage;
+      TUI.Run_TUI;
       return;
    end if;
 
@@ -350,6 +353,9 @@ begin
 
       elsif Cmd = "mirror" then
          Do_Mirror;
+
+      elsif Cmd = "tui" then
+         TUI.Run_TUI;
 
       elsif Cmd = "help" or else Cmd = "--help" or else Cmd = "-h" then
          Print_Usage;
