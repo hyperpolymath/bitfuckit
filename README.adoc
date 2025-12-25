@@ -2,7 +2,8 @@
 :toc:
 :toclevels: 2
 
-Bitbucket CLI tool written in Ada.
+Bitbucket CLI tool written in Ada. They didn't make it, so I did.
+Equivalent to GitHub's 'gh', GitLabs 'glab', or Codeberg's 'tea'.
 
 == Features
 
