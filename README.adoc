@@ -320,9 +320,91 @@ Every CLI command has a GraphQL equivalent:
 
 The full schema is in `graphql/schema.graphql`.
 
+== Forge Mesh Architecture
+
+`bitfuckit` includes a resilient multi-forge mirroring system with automatic fallback.
+
+=== Architecture
+
+[source]
+----
+                    ┌─────────────┐
+                    │   GitHub    │  ← Primary (single source of truth)
+                    │   (hub)     │
+                    └──────┬──────┘
+                           │
+         ┌─────────────────┼─────────────────┐
+         │                 │                 │
+         ▼                 ▼                 ▼
+    ┌─────────┐       ┌─────────┐       ┌─────────┐
+    │ GitLab  │◄─────►│SourceHut│◄─────►│Codeberg │
+    └────┬────┘       └────┬────┘       └────┬────┘
+         │                 │                 │
+         └─────────────────┴─────────────────┘
+                    Fallback mesh
+----
+
+*Normal Mode*: All pushes come from GitHub (single source of truth).
+
+*Degraded Mode*: If GitHub becomes unreachable, the most recently synced spoke becomes a temporary source. Clear warnings are displayed when operating in degraded mode.
+
+*Recovery*: When GitHub comes back online, run `forge-recover` to re-establish it as the source and sync all spokes.
+
+=== Forge Mesh Commands
+
+[source,bash]
+----
+# Check health of all forges
+just forge-health
+
+# Mirror repository to all healthy forges (with automatic fallback)
+just forge-mirror my-repo
+
+# Sync to a specific forge
+just forge-sync my-repo codeberg
+
+# Recover from degraded mode (re-sync all from GitHub)
+just forge-recover my-repo
+
+# Mirror bitfuckit itself
+just mirror-self
+----
+
+=== Degraded Mode Behavior
+
+When GitHub is unreachable:
+
+. System automatically detects the most recently synced spoke
+. Uses that spoke as temporary source
+. Displays clear WARNING banner about degraded operation
+. Tracks sync timestamps for recovery
+
+[source]
+----
+╔════════════════════════════════════════════════════════════════╗
+║  WARNING: OPERATING IN DEGRADED MODE                           ║
+║                                                                ║
+║  Primary source (GitHub) is unreachable.                       ║
+║  Using fallback: gitlab                                        ║
+║                                                                ║
+║  Data may be stale. Will auto-recover when GitHub is back.    ║
+╚════════════════════════════════════════════════════════════════╝
+----
+
+=== Spoke-to-Spoke Sync
+
+If one forge can't reach GitHub but another recently synced forge can:
+
+[source,bash]
+----
+# Codeberg can't reach GitHub, but GitLab was just synced
+just forge-sync my-repo codeberg
+# Will pull from GitLab instead of GitHub
+----
+
 == Integration with forge-mirror
 
-`bitfuckit` works seamlessly with the `forge-mirror` script for multi-forge workflows:
+`bitfuckit` also works with the simpler `forge-mirror` script for basic multi-forge workflows:
 
 [source,bash]
 ----

@@ -57,3 +57,27 @@ man:
 # Generate shell completions
 completions:
     @echo "Completions in completions/"
+
+# ============================================================================
+# Forge Mesh Operations (Multi-forge mirroring with fallback)
+# ============================================================================
+
+# Check health of all forges
+forge-health:
+    ./scripts/forge-mesh.sh health
+
+# Mirror to all forges (with automatic fallback if GitHub down)
+forge-mirror repo:
+    ./scripts/forge-mesh.sh mirror {{repo}}
+
+# Sync to specific forge
+forge-sync repo dest:
+    ./scripts/forge-mesh.sh sync {{repo}} {{dest}}
+
+# Recover from degraded mode (re-sync all from GitHub)
+forge-recover repo:
+    ./scripts/forge-mesh.sh recover {{repo}}
+
+# Mirror this repo (bitfuckit) to all forges
+mirror-self:
+    ./scripts/forge-mesh.sh mirror bitfuckit
