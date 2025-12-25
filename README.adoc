@@ -6,7 +6,8 @@
 :source-highlighter: rouge
 
 Bitbucket CLI tool written in Ada. They didn't make it, so I did.
-Equivalent to GitHub's `gh`, GitLab's `glab`, or Codeberg's `tea`.
+
+Bitbucket's answer to GitHub's `gh`, GitLab's `glab`, or Codeberg's `tea`.
 
 image:https://img.shields.io/badge/language-Ada-blue[Ada]
 image:https://img.shields.io/badge/SPARK-verified-green[SPARK]
