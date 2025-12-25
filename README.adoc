@@ -5,12 +5,15 @@
 :icons: font
 :source-highlighter: rouge
 
-Bitbucket CLI tool written in Ada. They didn't make it, so I did.
+*Fire-and-Fuck-GET (and more)* with Bitbucket.
+
+Bitbucket CLI tool written in Ada. They didn't make it...so I did!
 
 Bitbucket's answer to GitHub's `gh`, GitLab's `glab`, or Codeberg's `tea`.
 
 image:https://img.shields.io/badge/language-Ada-blue[Ada]
 image:https://img.shields.io/badge/SPARK-verified-green[SPARK]
+image:https://img.shields.io/badge/GraphQL-API-e10098[GraphQL]
 image:https://img.shields.io/badge/license-AGPL--3.0--or--later-blue[License]
 
 toc::[]
@@ -25,6 +28,7 @@ This project provides:
 * Full Bitbucket repository management from the terminal
 * Ada/SPARK implementation for reliability and correctness
 * Interactive TUI mode with vim-style navigation
+* **GraphQL API server** - everything the CLI can do, exposed as GraphQL
 * Integration with forge-mirror for multi-forge workflows
 
 == Features
@@ -198,12 +202,15 @@ workspace=your-workspace
 ----
 bitfuckit/
 ├── src/
-│   ├── bitfuckit.adb      # Main CLI entry point
-│   ├── config.ads/adb     # Configuration & credential storage
+│   ├── bitfuckit.adb          # Main CLI entry point
+│   ├── config.ads/adb         # Configuration & credential storage
 │   ├── bitbucket_api.ads/adb  # REST API client
-│   └── tui.ads/adb        # Terminal UI (SPARK verified spec)
-├── bitfuckit.gpr          # GPRbuild project file
-└── bin/                   # Build output
+│   ├── tui.ads/adb            # Terminal UI (SPARK verified spec)
+│   └── graphql_server.ads/adb # GraphQL API server
+├── graphql/
+│   └── schema.graphql         # Full GraphQL schema
+├── bitfuckit.gpr              # GPRbuild project file
+└── bin/                       # Build output
 ----
 
 === SPARK Verification
@@ -218,6 +225,100 @@ is
    -- Formally verified interface
 end TUI;
 ----
+
+== GraphQL API
+
+*Fire-and-Fuck-GET (and more)* - everything the CLI can do, the GraphQL API can do too.
+
+=== Starting the GraphQL Server
+
+[source,bash]
+----
+# Start GraphQL server on default port 4000
+bitfuckit graphql serve
+
+# Custom port
+bitfuckit graphql serve --port 8080
+
+# With playground enabled
+bitfuckit graphql serve --playground
+----
+
+=== Example Queries
+
+[source,graphql]
+----
+# List repositories
+query {
+  repositories {
+    nodes {
+      slug
+      name
+      isPrivate
+      links { html }
+    }
+  }
+}
+
+# Create a repository
+mutation {
+  createRepository(input: {
+    name: "my-new-repo"
+    isPrivate: true
+    description: "Created via GraphQL"
+  }) {
+    success
+    repository {
+      slug
+      links { html }
+    }
+  }
+}
+
+# Mirror from GitHub
+mutation {
+  mirror(input: {
+    source: "https://github.com/user/repo"
+    targetName: "repo-mirror"
+    allBranches: true
+  }) {
+    success
+    branchesPushed
+  }
+}
+----
+
+=== CLI ↔ GraphQL Parity
+
+Every CLI command has a GraphQL equivalent:
+
+[cols="1,2"]
+|===
+|CLI Command |GraphQL Operation
+
+|`auth login`
+|`mutation { login(...) }`
+
+|`auth status`
+|`query { authStatus }`
+
+|`repo create`
+|`mutation { createRepository(...) }`
+
+|`repo list`
+|`query { repositories }`
+
+|`repo delete`
+|`mutation { deleteRepository(...) }`
+
+|`repo exists`
+|`query { repositoryExists(...) }`
+
+|`mirror`
+|`mutation { mirror(...) }`
+|===
+
+The full schema is in `graphql/schema.graphql`.
 
 == Integration with forge-mirror
 
