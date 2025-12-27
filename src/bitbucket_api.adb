@@ -138,4 +138,26 @@ package body Bitbucket_API is
          Index (Result.Data, """slug"":""" & Name & """") > 0;
    end Repo_Exists;
 
+   function List_Pull_Requests
+     (Creds : Config.Credentials;
+      Repo_Name : String;
+      State : String := "OPEN") return API_Result
+   is
+      State_Param : constant String :=
+         (if State'Length > 0
+          then "&state=" & State
+          else "");
+      URL : constant String :=
+         Base_URL & "/repositories/" &
+         To_String (Creds.Workspace) & "/" & Repo_Name &
+         "/pullrequests?pagelen=50" & State_Param;
+      Args : constant String :=
+         "-s -X GET " &
+         "-u " & To_String (Creds.Username) & ":" &
+         To_String (Creds.App_Password) & " " &
+         URL;
+   begin
+      return Run_Curl (Args);
+   end List_Pull_Requests;
+
 end Bitbucket_API;

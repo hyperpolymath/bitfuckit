@@ -9,6 +9,9 @@ and this project adheres to https://semver.org/[Semantic Versioning].
 
 == [Unreleased]
 
+=== Added
+* `pr list` - List pull requests for a repository with state filtering
+
 == [0.1.0] - 2025-12-25
 
 === Added

@@ -5,9 +5,10 @@ _bitfuckit() {
     local cur prev words cword
     _init_completion || return
 
-    local commands="auth repo mirror tui help"
+    local commands="auth repo pr mirror tui help"
     local auth_cmds="login status"
     local repo_cmds="create list delete exists"
+    local pr_cmds="list"
 
     case $cword in
         1)
@@ -21,6 +22,9 @@ _bitfuckit() {
                 repo)
                     COMPREPLY=($(compgen -W "$repo_cmds" -- "$cur"))
                     ;;
+                pr)
+                    COMPREPLY=($(compgen -W "$pr_cmds" -- "$cur"))
+                    ;;
             esac
             ;;
         *)
@@ -29,6 +33,13 @@ _bitfuckit() {
                     case ${words[2]} in
                         create)
                             COMPREPLY=($(compgen -W "--private --description" -- "$cur"))
+                            ;;
+                    esac
+                    ;;
+                pr)
+                    case ${words[2]} in
+                        list)
+                            COMPREPLY=($(compgen -W "--state --all" -- "$cur"))
                             ;;
                     esac
                     ;;

@@ -32,6 +32,11 @@ Delete a repository (requires confirmation).
 .B repo exists \fIname\fR
 Check if a repository exists.
 .TP
+.B pr list \fIrepo\fR [\-\-state \fISTATE\fR] [\-\-all]
+List pull requests for a repository.
+STATE can be OPEN, MERGED, DECLINED, or SUPERSEDED.
+Default is OPEN. Use \-\-all to show all states.
+.TP
 .B mirror \fIname\fR
 Mirror the current git repository to Bitbucket.
 Creates the repository if it doesn't exist, then pushes all branches.
@@ -87,6 +92,12 @@ Create a private repository:
 .TP
 Mirror current repo to Bitbucket:
 .B bitfuckit mirror my-project
+.TP
+List open pull requests:
+.B bitfuckit pr list my-project
+.TP
+List all pull requests:
+.B bitfuckit pr list my-project \-\-all
 .SH SEE ALSO
 .BR git (1),
 .BR gh (1),
