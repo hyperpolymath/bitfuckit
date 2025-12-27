@@ -7,6 +7,7 @@ _bitfuckit() {
     commands=(
         'auth:Manage authentication'
         'repo:Repository operations'
+        'pr:Pull request operations'
         'mirror:Mirror repository to Bitbucket'
         'tui:Launch interactive TUI'
         'help:Show help'
@@ -26,6 +27,11 @@ _bitfuckit() {
         'exists:Check if repository exists'
     )
 
+    local -a pr_commands
+    pr_commands=(
+        'list:List pull requests for a repository'
+    )
+
     _arguments -C \
         '1: :->command' \
         '2: :->subcommand' \
@@ -43,6 +49,9 @@ _bitfuckit() {
                 repo)
                     _describe -t repo_commands 'repo commands' repo_commands
                     ;;
+                pr)
+                    _describe -t pr_commands 'pr commands' pr_commands
+                    ;;
             esac
             ;;
         args)
@@ -53,6 +62,16 @@ _bitfuckit() {
                             _arguments \
                                 '--private[Make repository private]' \
                                 '--description[Set repository description]:description:'
+                            ;;
+                    esac
+                    ;;
+                pr)
+                    case $words[3] in
+                        list)
+                            _arguments \
+                                '1:repository name:' \
+                                '--state[Filter by state]:state:(OPEN MERGED DECLINED SUPERSEDED)' \
+                                '--all[Show all pull requests]'
                             ;;
                     esac
                     ;;

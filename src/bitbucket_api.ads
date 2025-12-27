@@ -33,4 +33,10 @@ package Bitbucket_API is
      (Creds : Config.Credentials;
       Name : String) return Boolean;
 
+   function List_Pull_Requests
+     (Creds : Config.Credentials;
+      Repo_Name : String;
+      State : String := "OPEN") return API_Result;
+   --  State: OPEN, MERGED, DECLINED, SUPERSEDED, or empty for all
+
 end Bitbucket_API;

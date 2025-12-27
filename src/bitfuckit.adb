@@ -6,6 +6,7 @@
 --   bitfuckit repo list
 --   bitfuckit repo delete <name>
 --   bitfuckit repo exists <name>
+--   bitfuckit pr list <repo> [--state STATE]
 --   bitfuckit mirror <github-repo>
 
 with Ada.Text_IO; use Ada.Text_IO;
@@ -33,6 +34,8 @@ procedure Bitfuckit is
       Put_Line ("  bitfuckit repo list               List repositories");
       Put_Line ("  bitfuckit repo delete <name>      Delete repository");
       Put_Line ("  bitfuckit repo exists <name>      Check if repo exists");
+      Put_Line ("  bitfuckit pr list <repo>          List pull requests");
+      Put_Line ("    --state STATE                   Filter: OPEN, MERGED, DECLINED");
       Put_Line ("  bitfuckit mirror <name>           Mirror from GitHub");
       Put_Line ("");
       Put_Line ("Get app password: https://bitbucket.org/account/settings/app-passwords/");
@@ -258,6 +261,139 @@ procedure Bitfuckit is
       end if;
    end Do_Repo_Exists;
 
+   procedure Do_PR_List is
+      Creds : constant Config.Credentials := Config.Load_Credentials;
+      Repo_Name : Unbounded_String := Null_Unbounded_String;
+      State : Unbounded_String := To_Unbounded_String ("OPEN");
+      I : Integer := 3;
+   begin
+      if not Config.Has_Credentials then
+         Put_Line ("Error: Not logged in. Run: bitfuckit auth login");
+         Set_Exit_Status (1);
+         return;
+      end if;
+
+      -- Parse arguments
+      while I <= Argument_Count loop
+         declare
+            Arg : constant String := Argument (I);
+         begin
+            if Arg = "--state" and then I < Argument_Count then
+               I := I + 1;
+               State := To_Unbounded_String (Argument (I));
+            elsif Arg = "--all" then
+               State := Null_Unbounded_String;
+            elsif Length (Repo_Name) = 0 then
+               Repo_Name := To_Unbounded_String (Arg);
+            end if;
+         end;
+         I := I + 1;
+      end loop;
+
+      if Length (Repo_Name) = 0 then
+         Put_Line ("Error: Repository name required");
+         Put_Line ("Usage: bitfuckit pr list <repo> [--state STATE]");
+         Set_Exit_Status (1);
+         return;
+      end if;
+
+      declare
+         Result : constant Bitbucket_API.API_Result :=
+            Bitbucket_API.List_Pull_Requests
+              (Creds, To_String (Repo_Name), To_String (State));
+         Data : constant String := To_String (Result.Data);
+         Pos : Natural := 1;
+         ID_Start, ID_End : Natural;
+         Title_Start, Title_End : Natural;
+         State_Start, State_End : Natural;
+         Author_Start, Author_End : Natural;
+         PR_Count : Natural := 0;
+      begin
+         if not Result.Success then
+            Put_Line ("Error: " & To_String (Result.Message));
+            Set_Exit_Status (1);
+            return;
+         end if;
+
+         Put_Line ("Pull Requests in " & To_String (Repo_Name) & ":");
+         Put_Line ("");
+
+         -- Parse JSON for pull requests
+         loop
+            -- Find PR ID
+            ID_Start := Ada.Strings.Unbounded.Index (Result.Data, """id"": ", Pos);
+            exit when ID_Start = 0;
+
+            ID_Start := ID_Start + 6;
+            ID_End := ID_Start;
+            while ID_End <= Length (Result.Data) and then
+                  Element (Result.Data, ID_End) in '0' .. '9'
+            loop
+               ID_End := ID_End + 1;
+            end loop;
+
+            -- Find title
+            Title_Start := Ada.Strings.Unbounded.Index
+              (Result.Data, """title"": """, ID_End);
+            if Title_Start > 0 then
+               Title_Start := Title_Start + 10;
+               Title_End := Ada.Strings.Unbounded.Index
+                 (Result.Data, """", Title_Start);
+            else
+               Title_Start := 1;
+               Title_End := 1;
+            end if;
+
+            -- Find state
+            State_Start := Ada.Strings.Unbounded.Index
+              (Result.Data, """state"": """, ID_End);
+            if State_Start > 0 then
+               State_Start := State_Start + 10;
+               State_End := Ada.Strings.Unbounded.Index
+                 (Result.Data, """", State_Start);
+            else
+               State_Start := 1;
+               State_End := 1;
+            end if;
+
+            -- Find author
+            Author_Start := Ada.Strings.Unbounded.Index
+              (Result.Data, """display_name"": """, ID_End);
+            if Author_Start > 0 then
+               Author_Start := Author_Start + 17;
+               Author_End := Ada.Strings.Unbounded.Index
+                 (Result.Data, """", Author_Start);
+            else
+               Author_Start := 1;
+               Author_End := 1;
+            end if;
+
+            -- Print PR info
+            Put ("#" & Slice (Result.Data, ID_Start, ID_End - 1));
+            if State_End > State_Start then
+               Put (" [" & Slice (Result.Data, State_Start, State_End - 1) & "]");
+            end if;
+            if Title_End > Title_Start then
+               Put (" " & Slice (Result.Data, Title_Start, Title_End - 1));
+            end if;
+            if Author_End > Author_Start then
+               Put (" (" & Slice (Result.Data, Author_Start, Author_End - 1) & ")");
+            end if;
+            New_Line;
+
+            PR_Count := PR_Count + 1;
+            Pos := ID_End + 100;  -- Skip ahead to next PR object
+         end loop;
+
+         if PR_Count = 0 then
+            Put_Line ("  No pull requests found.");
+         else
+            New_Line;
+            Put_Line ("Total:" & PR_Count'Image & " pull request(s)");
+         end if;
+      end;
+   end Do_PR_List;
+
    procedure Do_Mirror is
       Creds : constant Config.Credentials := Config.Load_Credentials;
       Name : constant String := (if Argument_Count >= 2
@@ -348,6 +484,14 @@ begin
             Do_Repo_Exists;
          else
             Put_Line ("Unknown repo command. Use: create, list, delete, exists");
+            Set_Exit_Status (1);
+         end if;
+
+      elsif Cmd = "pr" then
+         if Sub = "list" then
+            Do_PR_List;
+         else
+            Put_Line ("Unknown pr command. Use: list");
             Set_Exit_Status (1);
          end if;
 
