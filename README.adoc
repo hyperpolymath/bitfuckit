@@ -7,9 +7,7 @@
 
 *Fire-and-Fuck-GET (and more)* with Bitbucket.
 
-Bitbucket CLI tool written in Ada. They didn't make it...so I did!
-
-Bitbucket's answer to GitHub's `gh`, GitLab's `glab`, or Codeberg's `tea`.
+Bitbucket CLI tool written in Ada. They didn't make one. I had to.
 
 image:https://img.shields.io/badge/language-Ada-blue[Ada]
 image:https://img.shields.io/badge/SPARK-verified-green[SPARK]
@@ -18,18 +16,47 @@ image:https://img.shields.io/badge/license-AGPL--3.0--or--later-blue[License]
 
 toc::[]
 
-== Overview
+== Why This Exists
 
-`bitfuckit` fills the gap Atlassian left: a proper command-line interface for Bitbucket.
-While GitHub has `gh`, GitLab has `glab`, and Codeberg has `tea`, Bitbucket users have been left without an official CLI tool.
+GitHub has `gh`. GitLab has `glab`. Codeberg has `tea`. SourceHut has `hut`.
 
-This project provides:
+Bitbucket has... nothing. Atlassian, a company worth billions, couldn't be bothered to make a CLI for their own product. So here we are.
 
-* Full Bitbucket repository management from the terminal
-* Ada/SPARK implementation for reliability and correctness
-* Interactive TUI mode with vim-style navigation
-* **GraphQL API server** - everything the CLI can do, exposed as GraphQL
-* Integration with forge-mirror for multi-forge workflows
+This isn't a passion project. This is a tool that should have existed a decade ago, built out of necessity by someone who got tired of clicking through a web UI like it's 2005.
+
+== What This Is
+
+* A command-line interface for Bitbucket Cloud
+* Written in Ada/SPARK for reliability (not because it's trendy—because it works)
+* A drop-in equivalent to `gh`/`glab`/`tea` for Bitbucket workflows
+* AGPL-licensed, because if Atlassian wants to use it, they can open-source their improvements
+
+== What This Is NOT
+
+* An official Atlassian product (obviously)
+* A Bitbucket Server/Data Center client (Cloud only, for now)
+* A full reimplementation of the Bitbucket web UI
+* A replacement for `git` itself
+* Enterprise-grade™ with paid support tiers and a sales team
+
+== Scope Limits
+
+**In scope:**
+
+* Repository management (create, list, delete, clone URLs)
+* Pull request workflows (list, create, merge, review)
+* Authentication and credential management
+* Mirroring between forges
+* Pipelines status and basic management
+* Interactive TUI for common operations
+
+**Out of scope (use the web UI):**
+
+* Bitbucket admin/workspace settings
+* Complex permission matrices
+* Jira integration configuration
+* Billing and subscription management
+* Anything that requires OAuth2 web flows
 
 == Features
 
@@ -42,6 +69,9 @@ This project provides:
 * `repo list` - List all repositories in workspace
 * `repo delete` - Delete a repository (with confirmation)
 * `repo exists` - Check if repository exists
+
+=== Pull Requests
+* `pr list` - List pull requests with state filtering (OPEN/MERGED/DECLINED)
 
 === Mirroring
 * `mirror` - Mirror a repository from GitHub to Bitbucket
@@ -154,6 +184,31 @@ bitfuckit repo exists my-repo
 
 # Delete repository (requires confirmation)
 bitfuckit repo delete my-repo
+----
+
+=== Pull Requests
+
+[source,bash]
+----
+# List open pull requests
+bitfuckit pr list my-repo
+
+# List merged PRs
+bitfuckit pr list my-repo --state MERGED
+
+# List all PRs regardless of state
+bitfuckit pr list my-repo --all
+----
+
+Output:
+[source]
+----
+Pull Requests in my-repo:
+
+#42 [OPEN] Fix authentication bug (John Doe)
+#41 [OPEN] Add dark mode support (Jane Smith)
+
+Total: 2 pull request(s)
 ----
 
 === Mirroring from GitHub
@@ -314,6 +369,9 @@ Every CLI command has a GraphQL equivalent:
 |`repo exists`
 |`query { repositoryExists(...) }`
 
+|`pr list`
+|`query { pullRequests(...) }`
+
 |`mirror`
 |`mutation { mirror(...) }`
 |===
@@ -428,17 +486,19 @@ forge-mirror push my-repo --forges github,gitlab,bitbucket,codeberg,radicle
 ** `POST /repositories/{workspace}/{repo}` - Create repo
 ** `DELETE /repositories/{workspace}/{repo}` - Delete repo
 ** `GET /repositories/{workspace}/{repo}` - Get repo details
+** `GET /repositories/{workspace}/{repo}/pullrequests` - List pull requests
 
 == Roadmap
 
-=== v0.1.0 (Current)
+=== v0.1.x (Current)
 * [x] Authentication (login/status)
 * [x] Repository CRUD operations
 * [x] GitHub mirror
 * [x] Interactive TUI
+* [x] Pull request listing (`pr list`)
 
 === v0.2.0 (Planned)
-* [ ] Pull request management
+* [ ] Pull request create/merge/decline
 * [ ] Issue tracking
 * [ ] Pipeline status
 * [ ] Webhook management
