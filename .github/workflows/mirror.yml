@@ -137,7 +137,7 @@ jobs:
           ssh-private-key: ${{ secrets.GITEA_SSH_KEY }}
 
       - name: Add Gitea to known hosts
-        run: ssh-keyscan -t ed25519 gitea.com >> ~/.ssh/known_hosts
+        run: ssh-keyscan -t rsa gitea.com >> ~/.ssh/known_hosts
 
       - name: Push to Gitea
         env:
