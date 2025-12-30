@@ -1,0 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+---
+
+*bitfuckit* — The Bitbucket CLI that Atlassian didn't make.
+
+https://github.com/hyperpolymath/bitfuckit[GitHub] | https://github.com/hyperpolymath/bitfuckit/issues[Issues] | AGPL-3.0-or-later
+
+_This is an unofficial community project. Not affiliated with Atlassian._
