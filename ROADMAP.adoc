@@ -1,23 +1,284 @@
-;; SPDX-License-Identifier: AGPL-3.0-or-later
-;; STATE.scm - Current project state
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= bitfuckit Roadmap
+:toc:
+:toclevels: 2
 
-(define project-state
-  `((metadata
-      ((version . "1.0.0")
-       (schema-version . "1")
-       (created . "2025-12-29T03:26:30+00:00")
-       (updated . "2025-12-29T03:26:30+00:00")
-       (project . "Twingate Helm Deploy")
-       (repo . "twingate-helm-deploy")))
-    (current-position
-      ((phase . "initial")
-       (overall-completion . 0)
-       (working-features . ())))
-    (route-to-mvp
-      ((milestones
-        ((v0.1 . ((items . ("Initial setup"))))))))
-    (blockers-and-issues . ())
-    (critical-next-actions
-      ((immediate . ())
-       (this-week . ())
-       (this-month . ())))))
+This document outlines the development roadmap for bitfuckit, the community-built Bitbucket CLI.
+
+== Philosophy
+
+We build what Atlassian won't. Every feature prioritized here represents functionality that should exist in an official tool but doesn't.
+
+== Current Status
+
+*v0.1.0* (Released) — Foundation
+
+== Version Roadmap
+
+=== v0.1.x — Foundation (Current)
+
+[cols="1,3,1"]
+|===
+|Feature |Description |Status
+
+|Authentication
+|`auth login`, `auth status` with app password
+|✓ Complete
+
+|Repository CRUD
+|`repo create`, `repo list`, `repo delete`, `repo exists`
+|✓ Complete
+
+|Pull Request Listing
+|`pr list` with state filtering (OPEN/MERGED/DECLINED)
+|✓ Complete
+
+|GitHub Mirror
+|One-command mirroring from GitHub to Bitbucket
+|✓ Complete
+
+|Interactive TUI
+|Vim-style navigation, color-coded interface
+|✓ Complete
+
+|SPARK Verification
+|Formal verification of TUI specification
+|✓ Complete
+
+|GraphQL API
+|Basic schema and server implementation
+|⚠ Partial
+|===
+
+=== v0.2.0 — Pull Request Workflows
+
+Target: Q1 2025
+
+[cols="1,3,1"]
+|===
+|Feature |Description |Status
+
+|PR Create
+|Create pull requests from CLI
+|☐ Planned
+
+|PR Merge
+|Merge pull requests (with merge strategy options)
+|☐ Planned
+
+|PR Decline
+|Decline pull requests with comment
+|☐ Planned
+
+|PR Comments
+|List, add, and reply to PR comments
+|☐ Planned
+
+|PR Diff
+|View PR diffs in terminal
+|☐ Planned
+
+|PR Approve
+|Approve pull requests
+|☐ Planned
+|===
+
+=== v0.3.0 — Issue Tracking
+
+Target: Q2 2025
+
+[cols="1,3,1"]
+|===
+|Feature |Description |Status
+
+|Issue List
+|List issues with filtering
+|☐ Planned
+
+|Issue Create
+|Create new issues
+|☐ Planned
+
+|Issue Update
+|Update issue status, assignee, labels
+|☐ Planned
+
+|Issue Comments
+|Add and view issue comments
+|☐ Planned
+|===
+
+=== v0.4.0 — Pipeline Integration
+
+Target: Q2 2025
+
+[cols="1,3,1"]
+|===
+|Feature |Description |Status
+
+|Pipeline Status
+|View pipeline status for branches
+|☐ Planned
+
+|Pipeline Trigger
+|Trigger pipeline runs
+|☐ Planned
+
+|Pipeline Logs
+|Stream pipeline logs to terminal
+|☐ Planned
+
+|Pipeline Variables
+|Manage pipeline variables
+|☐ Planned
+|===
+
+=== v0.5.0 — Team & Access Management
+
+Target: Q3 2025
+
+[cols="1,3,1"]
+|===
+|Feature |Description |Status
+
+|Team List
+|List workspace members
+|☐ Planned
+
+|Branch Permissions
+|View/set branch permissions
+|☐ Planned
+
+|Deploy Keys
+|Manage deploy keys
+|☐ Planned
+
+|SSH Keys
+|Manage SSH keys
+|☐ Planned
+
+|Webhook Management
+|Create/list/delete webhooks
+|☐ Planned
+|===
+
+=== v1.0.0 — Feature Parity
+
+Target: Q4 2025
+
+Full feature parity with `gh` and `glab` for comparable functionality.
+
+* All CRUD operations for repositories, PRs, issues
+* Full pipeline integration
+* Team and access management
+* Robust error handling and offline support
+* Comprehensive test suite
+* Windows support
+
+== Platform Support
+
+[cols="1,1,2"]
+|===
+|Platform |Status |Notes
+
+|Linux (x86_64)
+|✓ Supported
+|Primary development platform
+
+|Linux (aarch64)
+|☐ Planned
+|Awaiting CI infrastructure
+
+|macOS (Intel)
+|⚠ Untested
+|Should work with Homebrew GNAT
+
+|macOS (Apple Silicon)
+|⚠ Untested
+|Awaiting GNAT support
+
+|Windows
+|☐ Planned v1.0
+|Requires GNAT for Windows
+|===
+
+== Package Distribution
+
+[cols="1,1,2"]
+|===
+|Format |Status |Repository
+
+|AUR (Arch)
+|✓ Ready
+|`yay -S bitfuckit`
+
+|Homebrew
+|☐ Planned
+|`brew install bitfuckit`
+
+|Fedora COPR
+|☐ Planned
+|`dnf copr enable hyperpolymath/bitfuckit`
+
+|Debian PPA
+|☐ Planned
+|`apt install bitfuckit`
+
+|Nix
+|☐ Planned
+|`nix-env -iA nixpkgs.bitfuckit`
+
+|MacPorts
+|☐ Planned
+|`port install bitfuckit`
+
+|winget
+|☐ Planned v1.0
+|`winget install bitfuckit`
+|===
+
+== Technical Debt & Improvements
+
+=== Security Hardening (Priority: High)
+
+* [ ] Migrate from process-spawned curl to native HTTP client
+* [ ] Secure credential storage (libsecret/keyring integration)
+* [ ] Input sanitization for all API parameters
+* [ ] Remove credentials from process command lines
+
+=== Code Quality
+
+* [ ] Expand SPARK coverage beyond TUI
+* [ ] Add AUnit test framework
+* [ ] Implement structured logging
+* [ ] Add telemetry opt-in for crash reporting
+
+=== Performance
+
+* [ ] Connection pooling for API requests
+* [ ] Response caching for list operations
+* [ ] Lazy loading in TUI for large datasets
+
+== Contributing
+
+See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] for contribution guidelines.
+
+Priority areas for contributions:
+
+1. Pull request workflows (v0.2.0 features)
+2. Windows platform testing
+3. Additional package formats
+4. SPARK proof expansion
+
+== Non-Goals
+
+These features are explicitly out of scope:
+
+* Bitbucket Server/Data Center support (Cloud only)
+* Admin/workspace settings management
+* Jira integration configuration
+* Billing/subscription management
+* Features requiring OAuth2 web flows
+* GUI applications
+
+If Atlassian wants these features in a CLI, they can build one themselves.

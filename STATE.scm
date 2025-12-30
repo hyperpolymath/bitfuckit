@@ -1,105 +1,136 @@
-; SPDX-License-Identifier: AGPL-3.0-or-later
-; STATE.scm - Current project state
+;; SPDX-License-Identifier: AGPL-3.0-or-later
+;; STATE.scm - Current project state for bitfuckit
 
-(state
-  (metadata
-    (version "0.1.0-alpha")
-    (schema-version "1.0")
-    (created "2025-12-25")
-    (updated "2025-12-25")
-    (project "bitfuckit")
-    (repo "https://github.com/hyperpolymath/bitfuckit"))
+(define project-state
+  `((metadata
+      ((version . "0.1.0")
+       (schema-version . "1")
+       (created . "2025-12-25T00:00:00+00:00")
+       (updated . "2025-12-30T00:00:00+00:00")
+       (project . "bitfuckit")
+       (repo . "bitfuckit")
+       (tagline . "Bitbucket CLI tool - the one Atlassian didn't make")))
 
-  (project-context
-    (name "bitfuckit")
-    (tagline "Bitbucket CLI tool in Ada - they didn't make it, so I did")
-    (tech-stack
-      (language "Ada 2012")
-      (verification "SPARK 2014")
-      (build "GPRbuild")
-      (http "curl subprocess")))
+    (project-context
+      ((name . "bitfuckit")
+       (purpose . "Command-line interface for Bitbucket Cloud, filling the gap left by Atlassian")
+       (tech-stack . ("Ada 2022" "SPARK" "GPRbuild" "GraphQL"))
+       (primary-language . "ada")))
 
-  (current-position
-    (phase "alpha")
-    (overall-completion 40)
-    (components
-      (cli-core (status complete) (completion 100))
-      (auth (status complete) (completion 100))
-      (repo-crud (status complete) (completion 100))
-      (mirror (status complete) (completion 100))
-      (tui (status complete) (completion 100))
-      (pr-management (status planned) (completion 0))
-      (pipeline-status (status planned) (completion 0))
-      (packaging (status in-progress) (completion 10)))
-    (working-features
-      "auth login/status"
-      "repo create/list/delete/exists"
-      "mirror from GitHub"
-      "interactive TUI"))
+    (current-position
+      ((phase . "v0.1.0-released")
+       (overall-completion . 25)
+       (components
+         ((authentication
+            ((status . "complete")
+             (completion . 100)
+             (features . ("login" "status" "app-password-storage"))))
+          (repository-ops
+            ((status . "complete")
+             (completion . 100)
+             (features . ("create" "list" "delete" "exists"))))
+          (pull-requests
+            ((status . "partial")
+             (completion . 30)
+             (features . ("list"))
+             (missing . ("create" "merge" "decline" "approve"))))
+          (mirroring
+            ((status . "complete")
+             (completion . 100)
+             (features . ("github-to-bitbucket"))))
+          (tui
+            ((status . "complete")
+             (completion . 100)
+             (features . ("vim-navigation" "color-interface" "menu-selection"))))
+          (graphql-api
+            ((status . "partial")
+             (completion . 40)
+             (features . ("schema" "basic-server"))
+             (missing . ("full-resolvers" "subscriptions"))))))
+       (working-features
+         . ("auth login" "auth status" "repo create" "repo list"
+            "repo delete" "repo exists" "pr list" "mirror" "tui"))))
 
-  (route-to-mvp
-    (milestone-1
-      (name "Core CLI")
-      (status complete)
-      (items
-        (item "Authentication" complete)
-        (item "Repository CRUD" complete)
-        (item "Mirror command" complete)))
+    (route-to-mvp
+      ((milestones
+        ((v0.1.0
+           ((name . "Foundation")
+            (status . "released")
+            (date . "2025-12-30")
+            (items . ("Authentication" "Repository CRUD" "PR listing"
+                      "GitHub mirror" "Interactive TUI" "SPARK verification"))))
+         (v0.2.0
+           ((name . "Pull Request Workflows")
+            (status . "planned")
+            (target . "Q1 2025")
+            (items . ("PR create" "PR merge" "PR decline" "PR comments"
+                      "PR diff" "PR approve"))))
+         (v0.3.0
+           ((name . "Issue Tracking")
+            (status . "planned")
+            (target . "Q2 2025")
+            (items . ("Issue list" "Issue create" "Issue update" "Issue comments"))))
+         (v0.4.0
+           ((name . "Pipeline Integration")
+            (status . "planned")
+            (target . "Q2 2025")
+            (items . ("Pipeline status" "Pipeline trigger" "Pipeline logs"))))
+         (v0.5.0
+           ((name . "Team & Access")
+            (status . "planned")
+            (target . "Q3 2025")
+            (items . ("Team list" "Branch permissions" "Deploy keys" "Webhooks"))))
+         (v1.0.0
+           ((name . "Feature Parity")
+            (status . "planned")
+            (target . "Q4 2025")
+            (items . ("Windows support" "Full test suite" "All CRUD ops"))))))))
 
-    (milestone-2
-      (name "User Experience")
-      (status complete)
-      (items
-        (item "Interactive TUI" complete)
-        (item "Vim-style navigation" complete)
-        (item "Color output" complete)))
+    (blockers-and-issues
+      ((critical . ())
+       (high
+         . (((id . "SEC-001")
+             (description . "Shell injection risk in API calls")
+             (mitigation . "Input sanitization needed"))
+            ((id . "SEC-002")
+             (description . "Plain text credential storage")
+             (mitigation . "Integrate with libsecret/keyring"))))
+       (medium
+         . (((id . "PERF-001")
+             (description . "Process-spawned curl for HTTP")
+             (mitigation . "Consider native HTTP library"))))
+       (low . ())))
 
-    (milestone-3
-      (name "Distribution")
-      (status in-progress)
-      (items
-        (item "Comprehensive README" complete)
-        (item "SCM files" complete)
-        (item "Man page" pending)
-        (item "Shell completions" pending)
-        (item "Package builds" pending)))
+    (critical-next-actions
+      ((immediate
+         . ("Create v0.2.0 branch for PR workflows"
+            "Document security improvements in SECURITY.md"))
+       (this-week
+         . ("Implement pr create command"
+            "Add input sanitization to API calls"))
+       (this-month
+         . ("Complete v0.2.0 PR workflows"
+            "Add AUnit test framework"))))
 
-    (milestone-4
-      (name "Extended Features")
-      (status planned)
-      (items
-        (item "Pull request management" pending)
-        (item "Pipeline status" pending)
-        (item "Issue tracking" pending))))
+    (session-history
+      ((2025-12-30
+         ((accomplishments
+            . ("Released v0.1.0"
+               "Updated README with unofficial disclaimer"
+               "Enhanced justfile with combinatoric recipes"
+               "Fixed ROADMAP.adoc"
+               "Updated config.ncl with documented cookbook"
+               "Cleaned up cruft files"))
+          (decisions
+            . ("AGPL license to ensure community contributions if Atlassian uses this"
+               "SPARK verification for TUI to demonstrate reliability"))))))))
 
-  (blockers-and-issues
-    (critical)
-    (high
-      (issue "Needs gprbuild to compile - not commonly installed"))
-    (medium
-      (issue "No automated tests yet")
-      (issue "Error handling could be more robust"))
-    (low
-      (issue "TUI menu actions are stubs")))
+;; Helper functions
+(define (get-completion-percentage state)
+  (cadr (assoc 'overall-completion (cadr (assoc 'current-position state)))))
 
-  (critical-next-actions
-    (immediate
-      "Add justfile for build automation"
-      "Add man page"
-      "Create shell completions")
-    (this-week
-      "Tag v0.1.0-alpha release"
-      "Set up GitHub release workflow")
-    (this-month
-      "Package for Fedora COPR"
-      "Implement PR management commands"))
+(define (get-blockers state priority)
+  (cadr (assoc priority (cadr (assoc 'blockers-and-issues state)))))
 
-  (session-history
-    (session-001
-      (date "2025-12-25")
-      (accomplishments
-        "Created bitfuckit repo"
-        "Implemented full CLI in Ada"
-        "Added SPARK TUI interface"
-        "Created comprehensive README"
-        "Added SCM files"))))
+(define (get-milestone state version)
+  (cadr (assoc version (cadr (assoc 'milestones (cadr (assoc 'route-to-mvp state)))))))

@@ -534,3 +534,29 @@ by the Free Software Foundation, either version 3 of the License, or
 * https://bitbucket.org/account/settings/app-passwords/[Bitbucket App Passwords]
 * https://developer.atlassian.com/cloud/bitbucket/rest/intro/[Bitbucket REST API]
 * https://github.com/hyperpolymath/forge-mirror[forge-mirror] - Universal git forge mirror script
+
+'''
+
+== Disclaimer
+
+[NOTE]
+====
+*This is an unofficial community tool.* It is not affiliated with, endorsed by, or supported by Atlassian Pty Ltd.
+
+Bitbucket® is a registered trademark of Atlassian Pty Ltd. All product and company names are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
+====
+
+[IMPORTANT]
+====
+*A note on corporate priorities*
+
+GitHub has https://cli.github.com/[`gh`]. GitLab has https://gitlab.com/gitlab-org/cli[`glab`]. Codeberg has https://codeberg.org/forgejo/forgejo-cli[`tea`]. SourceHut has https://git.sr.ht/~emersion/hut[`hut`]. Even Gitea has https://gitea.com/gitea/tea[`tea`].
+
+Atlassian—a company valued at over $50 billion USD—has provided no official command-line interface for Bitbucket. Not in 2015. Not in 2020. Not now.
+
+Every other major git forge recognized that developers live in the terminal and provided first-class CLI tooling. Atlassian apparently disagrees, or simply doesn't care enough to allocate engineering resources to what has become a basic expectation for modern developer tooling.
+
+This tool exists because the gap in functionality was too large to ignore. It was built out of necessity, not passion. The AGPL license ensures that if Atlassian ever decides to incorporate any of this work, they must contribute back to the community they have thus far neglected to serve.
+
+We remain hopeful that Atlassian will eventually prioritize developer experience over enterprise feature bloat and provide an official CLI. Until then, `bitfuckit` will continue to fill the void.
+====
