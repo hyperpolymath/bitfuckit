@@ -9,9 +9,9 @@ This document outlines the development roadmap for bitfuckit, the community-buil
 
 We build what Atlassian won't. Every feature prioritized here represents functionality that should exist in an official tool but doesn't.
 
-== Current Status: v0.2.0-dev
+== Current Status: v0.5.0
 
-Actively developing infrastructure for robust, fault-tolerant, industry-leading CLI.
+All v0.5.0 modules complete. Now focusing on GraphQL server completion and container packaging.
 
 == What's in v0.2.0 (Current Release)
 
@@ -52,51 +52,87 @@ Actively developing infrastructure for robust, fault-tolerant, industry-leading 
 |✓ Complete
 |===
 
-== Gap to v0.5.0
+== What's in v0.5.0 (Current)
 
-v0.5.0 = Full GraphQL API + Team Management + Enterprise Features
+v0.5.0 = Full PR Workflows + Issue Tracking + DevOps Integration
 
-=== Must Complete for v0.5.0
+[cols="1,3,1"]
+|===
+|Feature |Description |Status
+
+|*PR Create/Merge*
+|Create and merge PRs from CLI
+|✓ Complete
+
+|*PR Comments/Approve*
+|Review workflow in CLI
+|✓ Complete
+
+|*Issue Tracking*
+|Full CRUD for issues
+|✓ Complete
+
+|*Pipeline Integration*
+|Status, trigger, logs, variables
+|✓ Complete
+
+|*Team Management*
+|List members, permissions
+|✓ Complete
+
+|*Branch Permissions*
+|View/set branch protections
+|✓ Complete
+
+|*SSH/Deploy Keys*
+|Key management
+|✓ Complete
+
+|*Webhooks*
+|Create/list/delete hooks
+|✓ Complete
+
+|*Access Tokens*
+|Repository access token management
+|✓ Complete
+
+|*Default Reviewers*
+|Configure automatic PR reviewers
+|✓ Complete
+|===
+
+=== Completed Code for v0.5.0
+
+* PR workflows (pull_requests.ads/adb): ~750 lines Ada
+* Issue tracking (issues.ads/adb): ~550 lines Ada
+* Pipeline integration (pipelines.ads/adb): ~700 lines Ada
+* Team/permissions (teams.ads/adb): ~600 lines Ada
+* Webhook management (webhooks.ads/adb): ~500 lines Ada
+* Wiki documentation: ~2400 lines AsciiDoc
+
+*Total new code: ~5500 lines*
+
+== Gap to v0.6.0
+
+v0.6.0 = GraphQL Server + Container + OAuth2
+
+=== Must Complete for v0.6.0
 
 [cols="1,3,1"]
 |===
 |Feature |Description |Gap
 
-|*PR Create/Merge*
-|Create and merge PRs from CLI
-|API calls needed
-
-|*PR Comments/Approve*
-|Review workflow in CLI
-|API calls needed
-
-|*Issue Tracking*
-|Full CRUD for issues
-|New module
-
-|*Pipeline Integration*
-|Status, trigger, logs, variables
-|New module
-
 |*GraphQL Server*
 |Full API for integrations
 |Complete server.adb
 
-|*Team Management*
-|List members, permissions
-|New API calls
+|*Wolfi Container*
+|Minimal secure container image
+|Containerfile + nerdctl
 
-|*Branch Permissions*
-|View/set branch protections
-|New API calls
-
-|*SSH/Deploy Keys*
-|Key management
-|New API calls
-
-|*Webhooks*
-|Create/list/delete hooks
-|New API calls
+|*OAuth2 Flows*
+|Web-based auth for enterprise
+|New module
 
 |*Cookbook Generation*
 |Auto-generate just/must/nickel recipes
@@ -106,28 +142,10 @@ v0.5.0 = Full GraphQL API + Team Management + Enterprise Features
 |Air-gapped quantum-resistant credential storage
 |Integration work
 
-|*Wolfi Container*
-|Minimal secure container image
-|Containerfile + nerdctl
-
 |*SPARK Expansion*
 |Formal verification beyond TUI
 |Proof work
 |===
-
-=== Estimated Work for v0.5.0
-
-* PR workflows: ~800 lines Ada
-* Issue tracking: ~600 lines Ada
-* Pipeline integration: ~1000 lines Ada
-* GraphQL completion: ~500 lines Ada
-* Team/permissions: ~400 lines Ada
-* Key management: ~300 lines Ada
-* Cookbook generator: ~400 lines (Nickel)
-* Container image: Containerfile + CI
-* SPARK proofs: ~200 lines specifications
-
-*Total new code: ~4200 lines*
 
 == Gap to v1.0.0
 
@@ -192,32 +210,27 @@ v1.0.0 = Feature parity with gh/glab + Production-ready
 
 [cols="1,2,1,1"]
 |===
-|Version |Focus |Est. Lines |Target
+|Version |Focus |Lines |Status
 
 |v0.2.0
 |Resilience infrastructure
 |~3000
 |✓ Done
 
-|v0.3.0
-|PR workflows + Issues
-|~1400
-|Q1 2025
-
-|v0.4.0
-|Pipelines + GraphQL
-|~1500
-|Q1 2025
-
 |v0.5.0
-|Team + Keys + Enterprise
-|~1300
-|Q2 2025
+|PR, Issues, Pipelines, Teams, Webhooks
+|~5500
+|✓ Done
+
+|v0.6.0
+|GraphQL Server + Container + OAuth2
+|~1500
+|In Progress
 
 |v1.0.0
-|Cross-platform + Polish
+|Cross-platform + Plugin System
 |~3000
-|Q3 2025
+|Q4 2025
 |===
 
 == Platform Support Matrix
@@ -343,10 +356,11 @@ v1.0.0 = Feature parity with gh/glab + Production-ready
 See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc].
 
 Priority areas:
-1. PR workflows (high impact)
+1. GraphQL server completion
 2. Windows testing
-3. Package formats
+3. Package formats (Homebrew, Nix)
 4. SPARK expansion
+5. OAuth2 implementation
 
 == Non-Goals
 
