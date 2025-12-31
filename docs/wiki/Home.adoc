@@ -58,13 +58,24 @@ This tool fills that gap.
 
 === Key Features
 
-* **Authentication** — App password-based authentication
-* **Repository CRUD** — Create, list, delete, check existence
-* **Pull Requests** — List PRs with state filtering
+* **Authentication** — App password-based authentication with secure storage
+* **Repository CRUD** — Create, list, delete, clone, check existence
+* **Pull Requests** — Create, list, merge, decline, comment on PRs
+* **Git LFS** — Full Large File Storage support with locking
 * **Mirroring** — One-command GitHub-to-Bitbucket mirroring
-* **Interactive TUI** — Vim-style navigation with color interface
+* **Interactive TUI** — Vim-style navigation with troubleshooter
+* **Network Resilience** — Circuit breaker, rate limiting, offline queue
 * **GraphQL API** — Programmatic access for automation
 * **SPARK Verification** — Formally verified TUI specification
+
+=== v0.2.0 Highlights
+
+* **Resilience** — Circuit breaker pattern, exponential backoff retry
+* **Network Awareness** — Metered connection detection, offline mode
+* **Caching** — API response caching with configurable TTL
+* **Offline Queue** — Queue operations for later execution
+* **TUI Troubleshooter** — Built-in diagnostic tool
+* **Progress Bars** — Visual feedback for long operations
 
 == Installation
 
@@ -138,15 +149,15 @@ bitfuckit tui
 |✓ Released
 
 |v0.2.0
-|PR create/merge/decline, Comments
+|Resilience, LFS, Network Awareness, TUI Troubleshooter
+|✓ Released
+
+|v0.5.0
+|PR create/merge/decline, Comments, Webhooks
 |In Development
 
-|v0.3.0
-|Issue tracking
-|Planned
-
-|v0.4.0
-|Pipeline integration
+|v0.6.0
+|Issue tracking, Pipelines integration
 |Planned
 
 |v1.0.0
