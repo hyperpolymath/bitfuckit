@@ -51,4 +51,10 @@ is
    -- Main TUI loop
    procedure Run_TUI;
 
+   -- Troubleshooter
+   procedure Show_Troubleshooter;
+
+   -- Help screens
+   procedure Show_Help (Topic : String := "");
+
 end TUI;

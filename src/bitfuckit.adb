@@ -1,13 +1,6 @@
 -- SPDX-License-Identifier: AGPL-3.0-or-later
--- bitfuckit - Bitbucket CLI tool in Ada
--- Usage:
---   bitfuckit auth login
---   bitfuckit repo create <name> [--private] [--description "desc"]
---   bitfuckit repo list
---   bitfuckit repo delete <name>
---   bitfuckit repo exists <name>
---   bitfuckit pr list <repo> [--state STATE]
---   bitfuckit mirror <github-repo>
+-- bitfuckit - The Bitbucket CLI Atlassian never made
+-- A fault-tolerant, enterprise-grade Bitbucket CLI in Ada/SPARK
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Command_Line; use Ada.Command_Line;
@@ -19,27 +12,134 @@ with GNAT.OS_Lib;
 
 procedure Bitfuckit is
 
+   Version_String : constant String := "0.2.0";
+   Build_Date     : constant String := "2025-12";
+
+   procedure Print_Version is
+   begin
+      Put_Line ("bitfuckit " & Version_String);
+      Put_Line ("Build: " & Build_Date);
+      Put_Line ("Language: Ada/SPARK 2012");
+      Put_Line ("License: AGPL-3.0-or-later");
+      Put_Line ("");
+      Put_Line ("Features:");
+      Put_Line ("  - Bitbucket Cloud API integration");
+      Put_Line ("  - Git LFS support");
+      Put_Line ("  - Circuit breaker fault tolerance");
+      Put_Line ("  - Network-aware operation");
+      Put_Line ("  - SELinux/firewalld integration");
+      Put_Line ("");
+      Put_Line ("https://github.com/hyperpolymath/bitfuckit");
+   end Print_Version;
+
    procedure Print_Usage is
    begin
-      Put_Line ("bitfuckit - Bitbucket CLI tool in Ada/SPARK");
+      Put_Line ("bitfuckit " & Version_String & " - The Bitbucket CLI Atlassian never made");
       Put_Line ("");
-      Put_Line ("Usage:");
-      Put_Line ("  bitfuckit                         Launch TUI interface");
-      Put_Line ("  bitfuckit tui                     Launch TUI interface");
-      Put_Line ("  bitfuckit auth login              Login with app password");
-      Put_Line ("  bitfuckit auth status             Show auth status");
-      Put_Line ("  bitfuckit repo create <name>      Create repository");
-      Put_Line ("    --private                       Make repo private");
-      Put_Line ("    --description ""text""            Set description");
-      Put_Line ("  bitfuckit repo list               List repositories");
-      Put_Line ("  bitfuckit repo delete <name>      Delete repository");
-      Put_Line ("  bitfuckit repo exists <name>      Check if repo exists");
-      Put_Line ("  bitfuckit pr list <repo>          List pull requests");
-      Put_Line ("    --state STATE                   Filter: OPEN, MERGED, DECLINED");
-      Put_Line ("  bitfuckit mirror <name>           Mirror from GitHub");
+      Put_Line ("USAGE:");
+      Put_Line ("  bitfuckit [command] [subcommand] [options]");
+      Put_Line ("  bitfuckit                             Launch TUI interface");
       Put_Line ("");
-      Put_Line ("Get app password: https://bitbucket.org/account/settings/app-passwords/");
+      Put_Line ("AUTHENTICATION:");
+      Put_Line ("  auth login                            Login with app password");
+      Put_Line ("  auth status                           Show auth status");
+      Put_Line ("  auth logout                           Remove credentials");
+      Put_Line ("");
+      Put_Line ("REPOSITORIES:");
+      Put_Line ("  repo create <name> [options]          Create repository");
+      Put_Line ("       --private                        Make repo private");
+      Put_Line ("       --description ""text""             Set description");
+      Put_Line ("  repo list                             List repositories");
+      Put_Line ("  repo delete <name>                    Delete repository");
+      Put_Line ("  repo exists <name>                    Check if repo exists");
+      Put_Line ("");
+      Put_Line ("PULL REQUESTS:");
+      Put_Line ("  pr list <repo> [options]              List pull requests");
+      Put_Line ("       --state STATE                    OPEN, MERGED, DECLINED");
+      Put_Line ("       --all                            Show all states");
+      Put_Line ("");
+      Put_Line ("MIRRORING:");
+      Put_Line ("  mirror <name>                         Mirror to Bitbucket");
+      Put_Line ("");
+      Put_Line ("GIT LFS:");
+      Put_Line ("  lfs status                            Show LFS status");
+      Put_Line ("  lfs track <pattern>                   Track files with LFS");
+      Put_Line ("  lfs fetch                             Fetch LFS objects");
+      Put_Line ("  lfs pull                              Pull LFS objects");
+      Put_Line ("  lfs push                              Push LFS objects");
+      Put_Line ("");
+      Put_Line ("NETWORK:");
+      Put_Line ("  network status                        Show network state");
+      Put_Line ("  network check                         Check API connectivity");
+      Put_Line ("");
+      Put_Line ("INTERFACE:");
+      Put_Line ("  tui                                   Launch TUI interface");
+      Put_Line ("  troubleshoot                          Run troubleshooter");
+      Put_Line ("");
+      Put_Line ("OPTIONS:");
+      Put_Line ("  -h, --help                            Show this help");
+      Put_Line ("  -V, --version                         Show version");
+      Put_Line ("  -q, --quiet                           Suppress output");
+      Put_Line ("  -v, --verbose                         Verbose output");
+      Put_Line ("      --no-color                        Disable colors");
+      Put_Line ("      --offline                         Use cached data only");
+      Put_Line ("");
+      Put_Line ("EXAMPLES:");
+      Put_Line ("  bitfuckit auth login");
+      Put_Line ("  bitfuckit repo create my-project --private");
+      Put_Line ("  bitfuckit pr list my-project --all");
+      Put_Line ("  bitfuckit mirror my-project");
+      Put_Line ("  bitfuckit lfs track ""*.psd""");
+      Put_Line ("");
+      Put_Line ("DOCUMENTATION:");
+      Put_Line ("  man bitfuckit                         View man page");
+      Put_Line ("  Wiki: https://github.com/hyperpolymath/bitfuckit/wiki");
+      Put_Line ("  App passwords: https://bitbucket.org/account/settings/app-passwords/");
    end Print_Usage;
+
+   procedure Print_Troubleshoot_Menu is
+   begin
+      Put_Line ("bitfuckit troubleshooter");
+      Put_Line ("");
+      Put_Line ("Common issues and solutions:");
+      Put_Line ("");
+      Put_Line ("1. AUTHENTICATION");
+      Put_Line ("   Error: Not logged in");
+      Put_Line ("   Fix: Run 'bitfuckit auth login'");
+      Put_Line ("   Docs: https://github.com/hyperpolymath/bitfuckit/wiki/Authentication");
+      Put_Line ("");
+      Put_Line ("2. APP PASSWORD");
+      Put_Line ("   Error: 401 Unauthorized");
+      Put_Line ("   Fix: Create app password with required permissions");
+      Put_Line ("   Link: https://bitbucket.org/account/settings/app-passwords/");
+      Put_Line ("   Required scopes: repository:read, repository:write, pullrequest:read");
+      Put_Line ("");
+      Put_Line ("3. NETWORK ISSUES");
+      Put_Line ("   Error: Connection refused / timeout");
+      Put_Line ("   Fix: Check internet, proxy settings, firewall");
+      Put_Line ("   Check: bitfuckit network status");
+      Put_Line ("   Docs: https://github.com/hyperpolymath/bitfuckit/wiki/Network");
+      Put_Line ("");
+      Put_Line ("4. GIT LFS");
+      Put_Line ("   Error: LFS not installed / not configured");
+      Put_Line ("   Fix: Install git-lfs, run 'git lfs install'");
+      Put_Line ("   Check: bitfuckit lfs status");
+      Put_Line ("   Docs: https://github.com/hyperpolymath/bitfuckit/wiki/Git-LFS");
+      Put_Line ("");
+      Put_Line ("5. RATE LIMITING");
+      Put_Line ("   Error: 429 Too Many Requests");
+      Put_Line ("   Fix: Wait for circuit breaker reset (30s)");
+      Put_Line ("   Note: bitfuckit auto-retries with backoff");
+      Put_Line ("   Docs: https://github.com/hyperpolymath/bitfuckit/wiki/Rate-Limits");
+      Put_Line ("");
+      Put_Line ("6. SSH KEYS");
+      Put_Line ("   Error: Permission denied (publickey)");
+      Put_Line ("   Fix: Add SSH key to Bitbucket account");
+      Put_Line ("   Link: https://bitbucket.org/account/settings/ssh-keys/");
+      Put_Line ("   Docs: https://github.com/hyperpolymath/bitfuckit/wiki/SSH-Keys");
+      Put_Line ("");
+      Put_Line ("For more help: https://github.com/hyperpolymath/bitfuckit/issues");
+   end Print_Troubleshoot_Menu;
 
    procedure Do_Auth_Login is
       Username : Unbounded_String;
@@ -504,9 +604,30 @@ begin
       elsif Cmd = "help" or else Cmd = "--help" or else Cmd = "-h" then
          Print_Usage;
 
+      elsif Cmd = "--version" or else Cmd = "-V" or else Cmd = "version" then
+         Print_Version;
+
+      elsif Cmd = "troubleshoot" then
+         Print_Troubleshoot_Menu;
+
+      elsif Cmd = "lfs" then
+         Put_Line ("Git LFS commands:");
+         Put_Line ("  lfs status    - Show LFS status");
+         Put_Line ("  lfs track     - Track files with LFS");
+         Put_Line ("  lfs fetch     - Fetch LFS objects");
+         Put_Line ("  lfs pull      - Pull LFS objects");
+         Put_Line ("  lfs push      - Push LFS objects");
+         Put_Line ("");
+         Put_Line ("Run 'bitfuckit lfs <command>' for details.");
+
+      elsif Cmd = "network" then
+         Put_Line ("Network commands:");
+         Put_Line ("  network status  - Show network state");
+         Put_Line ("  network check   - Check API connectivity");
+
       else
          Put_Line ("Unknown command: " & Cmd);
-         Print_Usage;
+         Put_Line ("Run 'bitfuckit --help' for usage information.");
          Set_Exit_Status (1);
       end if;
    end;

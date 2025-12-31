@@ -1,12 +1,11 @@
 -- SPDX-License-Identifier: AGPL-3.0-or-later
--- Bitfuckit - Bitbucket CLI in Ada
+-- Development build configuration (relaxed style checks)
 
-project Bitfuckit is
+project Bitfuckit_Dev is
    for Source_Dirs use ("src");
    for Object_Dir use "obj";
    for Exec_Dir use "bin";
    for Main use ("bitfuckit.adb");
-
    for Create_Missing_Dirs use "True";
 
    package Compiler is
@@ -14,12 +13,10 @@ project Bitfuckit is
          "-gnat2012",      -- Ada 2012 standard
          "-gnata",         -- Enable assertions
          "-gnatwa",        -- All warnings
-         "-gnatwU",        -- Suppress unused variable warnings
-         "-gnaty3abefiklt", -- Relaxed style checks (no order, spec, column checks)
-         "-gnatyM120",     -- Max line length 120
+         "-gnatwu",        -- Warn on unused entities
          "-gnatVa",        -- Validity checks
          "-O2",            -- Optimization
-         "-gnatp"          -- Suppress runtime checks for release
+         "-gnatyM120"      -- Allow lines up to 120 chars
       );
    end Compiler;
 
@@ -31,4 +28,4 @@ project Bitfuckit is
       for Default_Switches ("Ada") use ("-lcurl"); -- Link with libcurl
    end Linker;
 
-end Bitfuckit;
+end Bitfuckit_Dev;

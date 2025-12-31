@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 = bitfuckit Roadmap
 :toc:
-:toclevels: 2
+:toclevels: 3
 
 This document outlines the development roadmap for bitfuckit, the community-built Bitbucket CLI.
 
@@ -9,276 +9,352 @@ This document outlines the development roadmap for bitfuckit, the community-buil
 
 We build what Atlassian won't. Every feature prioritized here represents functionality that should exist in an official tool but doesn't.
 
-== Current Status
+== Current Status: v0.2.0-dev
 
-*v0.1.0* (Released) — Foundation
+Actively developing infrastructure for robust, fault-tolerant, industry-leading CLI.
 
-== Version Roadmap
-
-=== v0.1.x — Foundation (Current)
+== What's in v0.2.0 (Current Release)
 
 [cols="1,3,1"]
 |===
-|Feature |Description |Status
+|Component |Description |Status
 
-|Authentication
-|`auth login`, `auth status` with app password
+|*Core CLI*
+|Auth, repo CRUD, PR list, GitHub mirror, TUI
 |✓ Complete
 
-|Repository CRUD
-|`repo create`, `repo list`, `repo delete`, `repo exists`
+|*Fault Tolerance*
+|Retry logic, circuit breaker, rate limiting, health checks
 |✓ Complete
 
-|Pull Request Listing
-|`pr list` with state filtering (OPEN/MERGED/DECLINED)
+|*Network Awareness*
+|Metered connection detection, scheduling, offline queueing
 |✓ Complete
 
-|GitHub Mirror
-|One-command mirroring from GitHub to Bitbucket
+|*Security Scanning*
+|ClamAV integration, VirusTotal API (optional)
 |✓ Complete
 
-|Interactive TUI
-|Vim-style navigation, color-coded interface
+|*Storage Layer*
+|CubsDB backend, OpenTimestamp blockchain proofs
 |✓ Complete
 
-|SPARK Verification
-|Formal verification of TUI specification
+|*Syncthing Sync*
+|Distributed config sync across devices
 |✓ Complete
 
-|GraphQL API
-|Basic schema and server implementation
-|⚠ Partial
+|*System Security*
+|SELinux contexts, firewalld rules, container isolation
+|✓ Complete
+
+|*Multi-Shell Setup*
+|One-click setup for sh/bash/fish/nushell
+|✓ Complete
 |===
 
-=== v0.2.0 — Pull Request Workflows
+== Gap to v0.5.0
 
-Target: Q1 2025
+v0.5.0 = Full GraphQL API + Team Management + Enterprise Features
+
+=== Must Complete for v0.5.0
 
 [cols="1,3,1"]
 |===
-|Feature |Description |Status
+|Feature |Description |Gap
 
-|PR Create
-|Create pull requests from CLI
-|☐ Planned
+|*PR Create/Merge*
+|Create and merge PRs from CLI
+|API calls needed
 
-|PR Merge
-|Merge pull requests (with merge strategy options)
-|☐ Planned
+|*PR Comments/Approve*
+|Review workflow in CLI
+|API calls needed
 
-|PR Decline
-|Decline pull requests with comment
-|☐ Planned
+|*Issue Tracking*
+|Full CRUD for issues
+|New module
 
-|PR Comments
-|List, add, and reply to PR comments
-|☐ Planned
+|*Pipeline Integration*
+|Status, trigger, logs, variables
+|New module
 
-|PR Diff
-|View PR diffs in terminal
-|☐ Planned
+|*GraphQL Server*
+|Full API for integrations
+|Complete server.adb
 
-|PR Approve
-|Approve pull requests
-|☐ Planned
+|*Team Management*
+|List members, permissions
+|New API calls
+
+|*Branch Permissions*
+|View/set branch protections
+|New API calls
+
+|*SSH/Deploy Keys*
+|Key management
+|New API calls
+
+|*Webhooks*
+|Create/list/delete hooks
+|New API calls
+
+|*Cookbook Generation*
+|Auto-generate just/must/nickel recipes
+|New module
+
+|*Cicada Integration*
+|Air-gapped quantum-resistant credential storage
+|Integration work
+
+|*Wolfi Container*
+|Minimal secure container image
+|Containerfile + nerdctl
+
+|*SPARK Expansion*
+|Formal verification beyond TUI
+|Proof work
 |===
 
-=== v0.3.0 — Issue Tracking
+=== Estimated Work for v0.5.0
 
-Target: Q2 2025
+* PR workflows: ~800 lines Ada
+* Issue tracking: ~600 lines Ada
+* Pipeline integration: ~1000 lines Ada
+* GraphQL completion: ~500 lines Ada
+* Team/permissions: ~400 lines Ada
+* Key management: ~300 lines Ada
+* Cookbook generator: ~400 lines (Nickel)
+* Container image: Containerfile + CI
+* SPARK proofs: ~200 lines specifications
+
+*Total new code: ~4200 lines*
+
+== Gap to v1.0.0
+
+v1.0.0 = Feature parity with gh/glab + Production-ready
+
+=== Must Complete for v1.0.0 (beyond v0.5.0)
 
 [cols="1,3,1"]
 |===
-|Feature |Description |Status
+|Feature |Description |Complexity
 
-|Issue List
-|List issues with filtering
-|☐ Planned
+|*Windows Support*
+|GNAT for Windows, path handling
+|High
 
-|Issue Create
-|Create new issues
-|☐ Planned
+|*macOS Support*
+|Apple Silicon GNAT, keychain integration
+|Medium
 
-|Issue Update
-|Update issue status, assignee, labels
-|☐ Planned
+|*OAuth2 Flows*
+|Web-based auth for enterprise
+|High
 
-|Issue Comments
-|Add and view issue comments
-|☐ Planned
+|*Offline Mode*
+|Full functionality with local cache
+|Medium
+
+|*Plugin System*
+|Extensibility for custom commands
+|High
+
+|*Fuzzy Search*
+|agrep integration for repos/PRs/issues
+|Low
+
+|*Translation*
+|translate-shell integration, i18n
+|Medium
+
+|*Spell Check*
+|hunspell for commit messages/comments
+|Low
+
+|*Parallel Ops*
+|pssh integration for multi-repo operations
+|Medium
+
+|*Download Manager*
+|aria2 integration for large artifacts
+|Low
+
+|*Complete Test Suite*
+|AUnit framework, 80%+ coverage
+|High
+
+|*Full Documentation*
+|Wiki, man pages, --help for all commands
+|Medium
 |===
 
-=== v0.4.0 — Pipeline Integration
+=== Version Summary
 
-Target: Q2 2025
-
-[cols="1,3,1"]
+[cols="1,2,1,1"]
 |===
-|Feature |Description |Status
+|Version |Focus |Est. Lines |Target
 
-|Pipeline Status
-|View pipeline status for branches
-|☐ Planned
+|v0.2.0
+|Resilience infrastructure
+|~3000
+|✓ Done
 
-|Pipeline Trigger
-|Trigger pipeline runs
-|☐ Planned
+|v0.3.0
+|PR workflows + Issues
+|~1400
+|Q1 2025
 
-|Pipeline Logs
-|Stream pipeline logs to terminal
-|☐ Planned
+|v0.4.0
+|Pipelines + GraphQL
+|~1500
+|Q1 2025
 
-|Pipeline Variables
-|Manage pipeline variables
-|☐ Planned
-|===
+|v0.5.0
+|Team + Keys + Enterprise
+|~1300
+|Q2 2025
 
-=== v0.5.0 — Team & Access Management
-
-Target: Q3 2025
-
-[cols="1,3,1"]
-|===
-|Feature |Description |Status
-
-|Team List
-|List workspace members
-|☐ Planned
-
-|Branch Permissions
-|View/set branch permissions
-|☐ Planned
-
-|Deploy Keys
-|Manage deploy keys
-|☐ Planned
-
-|SSH Keys
-|Manage SSH keys
-|☐ Planned
-
-|Webhook Management
-|Create/list/delete webhooks
-|☐ Planned
+|v1.0.0
+|Cross-platform + Polish
+|~3000
+|Q3 2025
 |===
 
-=== v1.0.0 — Feature Parity
+== Platform Support Matrix
 
-Target: Q4 2025
-
-Full feature parity with `gh` and `glab` for comparable functionality.
-
-* All CRUD operations for repositories, PRs, issues
-* Full pipeline integration
-* Team and access management
-* Robust error handling and offline support
-* Comprehensive test suite
-* Windows support
-
-== Platform Support
-
-[cols="1,1,2"]
+[cols="1,1,1,2"]
 |===
-|Platform |Status |Notes
+|Platform |v0.2.0 |v1.0.0 |Notes
 
-|Linux (x86_64)
-|✓ Supported
-|Primary development platform
+|Linux x86_64
+|✓
+|✓
+|Primary
 
-|Linux (aarch64)
-|☐ Planned
-|Awaiting CI infrastructure
+|Linux aarch64
+|☐
+|✓
+|CI needed
 
-|macOS (Intel)
-|⚠ Untested
-|Should work with Homebrew GNAT
+|macOS Intel
+|⚠
+|✓
+|Homebrew GNAT
 
-|macOS (Apple Silicon)
-|⚠ Untested
-|Awaiting GNAT support
+|macOS ARM
+|☐
+|✓
+|GNAT support improving
 
 |Windows
-|☐ Planned v1.0
-|Requires GNAT for Windows
+|☐
+|✓
+|GNAT for Windows
+
+|FreeBSD
+|☐
+|⚠
+|Community interest
+
+|Container (Wolfi)
+|☐
+|✓
+|Chainguard base
 |===
 
 == Package Distribution
 
-[cols="1,1,2"]
+[cols="1,1,1"]
 |===
-|Format |Status |Repository
+|Format |v0.5.0 |v1.0.0
 
-|AUR (Arch)
-|✓ Ready
-|`yay -S bitfuckit`
+|GitHub Releases
+|✓
+|✓
 
-|Homebrew
-|☐ Planned
-|`brew install bitfuckit`
+|AUR
+|✓
+|✓
 
 |Fedora COPR
-|☐ Planned
-|`dnf copr enable hyperpolymath/bitfuckit`
+|✓
+|✓
+
+|Homebrew
+|☐
+|✓
+
+|Nix/NixOS
+|☐
+|✓
 
 |Debian PPA
-|☐ Planned
-|`apt install bitfuckit`
-
-|Nix
-|☐ Planned
-|`nix-env -iA nixpkgs.bitfuckit`
-
-|MacPorts
-|☐ Planned
-|`port install bitfuckit`
+|☐
+|✓
 
 |winget
-|☐ Planned v1.0
-|`winget install bitfuckit`
+|☐
+|✓
+
+|Container Registry
+|✓
+|✓
 |===
 
-== Technical Debt & Improvements
+== Integration Points
 
-=== Security Hardening (Priority: High)
+=== Required for v0.5.0
+* cicada - Quantum-resistant credential storage
+* syncthing - Distributed sync
+* CubsDB - Robust storage
+* OpenTimestamp - Blockchain provenance
+* ClamAV/VirusTotal - Security scanning
 
-* [ ] Migrate from process-spawned curl to native HTTP client
-* [ ] Secure credential storage (libsecret/keyring integration)
-* [ ] Input sanitization for all API parameters
-* [ ] Remove credentials from process command lines
+=== Optional Enhancements
+* rhodibot - RSR compliance automation
+* complete-linux-internet-repair - Network self-healing
+* hunspell - Spell checking
+* translate-shell - Translation
+* agrep - Fuzzy search
+* pssh - Parallel operations
+* aria2 - Download acceleration
 
-=== Code Quality
+== Technical Debt for v1.0.0
 
-* [ ] Expand SPARK coverage beyond TUI
-* [ ] Add AUnit test framework
-* [ ] Implement structured logging
-* [ ] Add telemetry opt-in for crash reporting
+=== Security (Critical)
+* [ ] Replace curl subprocess with native HTTP
+* [ ] Integrate with system keyring (libsecret)
+* [ ] Remove credentials from process argv
+* [ ] Add SBOM generation
 
-=== Performance
+=== Code Quality (High)
+* [ ] Expand SPARK proofs to all modules
+* [ ] AUnit test framework integration
+* [ ] Structured logging (JSON)
+* [ ] Crash telemetry (opt-in)
 
-* [ ] Connection pooling for API requests
-* [ ] Response caching for list operations
-* [ ] Lazy loading in TUI for large datasets
+=== Performance (Medium)
+* [ ] Connection pooling
+* [ ] Response caching
+* [ ] Lazy loading in TUI
 
 == Contributing
 
-See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] for contribution guidelines.
+See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc].
 
-Priority areas for contributions:
-
-1. Pull request workflows (v0.2.0 features)
-2. Windows platform testing
-3. Additional package formats
-4. SPARK proof expansion
+Priority areas:
+1. PR workflows (high impact)
+2. Windows testing
+3. Package formats
+4. SPARK expansion
 
 == Non-Goals
 
-These features are explicitly out of scope:
-
-* Bitbucket Server/Data Center support (Cloud only)
-* Admin/workspace settings management
-* Jira integration configuration
-* Billing/subscription management
-* Features requiring OAuth2 web flows
+Out of scope:
+* Bitbucket Server/Data Center (Cloud only)
+* Admin workspace settings
+* Jira integration config
+* Billing management
 * GUI applications
 
-If Atlassian wants these features in a CLI, they can build one themselves.
+If Atlassian wants these, they can build their own CLI.

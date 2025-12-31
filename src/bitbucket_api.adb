@@ -37,8 +37,7 @@ package body Bitbucket_API is
 
       Ret.Data := Output;
 
-      if Index (Output, """error""") > 0 or else
-         Index (Output, "\"error\"") > 0
+      if Index (Output, """error""") > 0
       then
          Ret.Success := False;
          Ret.Message := To_Unbounded_String ("API error");
