@@ -10,9 +10,16 @@ link:Home[**🏠 Home**]
 * link:Authentication[Authentication]
 * link:Repository-Operations[Repository Operations]
 * link:Pull-Requests[Pull Requests]
+* link:Issues[Issue Tracking]
 * link:Git-LFS[Git LFS]
 * link:Mirroring[Mirroring]
 * link:TUI-Guide[TUI Guide]
+
+== 🔧 DevOps Integration
+
+* link:Pipelines[Bitbucket Pipelines]
+* link:Webhooks[Webhooks]
+* link:Teams[Team Management]
 
 == 🌐 Network & Resilience
 
@@ -45,4 +52,4 @@ link:Home[**🏠 Home**]
 
 ---
 
-v0.2.0 | AGPL-3.0-or-later
+v0.5.0 | AGPL-3.0-or-later

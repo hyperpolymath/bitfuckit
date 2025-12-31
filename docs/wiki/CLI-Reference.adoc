@@ -204,16 +204,115 @@ bitfuckit pr list <repo> [options]
 |Maximum PRs to list
 |===
 
-*Output:*
-[source]
+=== `pr create`
+
+Create a new pull request.
+
+[source,bash]
 ----
-Pull Requests in my-repo:
+bitfuckit pr create <repo> --source <branch> --dest <branch> [options]
+----
 
-#42 [OPEN] Fix authentication bug (John Doe)
-#41 [OPEN] Add dark mode support (Jane Smith)
-#40 [MERGED] Update dependencies (John Doe)
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
 
-Total: 3 pull request(s)
+|`--source <branch>`
+|(required)
+|Source branch
+
+|`--dest <branch>`
+|main
+|Destination branch
+
+|`--title <text>`
+|auto
+|PR title
+
+|`--description <text>`
+|empty
+|PR description
+
+|`--reviewers <users>`
+|none
+|Comma-separated reviewer usernames
+
+|`--close-source`
+|true
+|Delete source branch after merge
+|===
+
+=== `pr view`
+
+View pull request details.
+
+[source,bash]
+----
+bitfuckit pr view <repo> <pr-id>
+----
+
+=== `pr merge`
+
+Merge a pull request.
+
+[source,bash]
+----
+bitfuckit pr merge <repo> <pr-id> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--strategy <type>`
+|merge_commit
+|Merge strategy: `merge_commit`, `squash`, `fast_forward`
+
+|`--message <text>`
+|auto
+|Commit message
+
+|`--close-source`
+|true
+|Delete source branch
+|===
+
+=== `pr approve`
+
+Approve a pull request.
+
+[source,bash]
+----
+bitfuckit pr approve <repo> <pr-id>
+----
+
+=== `pr decline`
+
+Decline a pull request.
+
+[source,bash]
+----
+bitfuckit pr decline <repo> <pr-id> [--reason <text>]
+----
+
+=== `pr comment`
+
+Add a comment to a pull request.
+
+[source,bash]
+----
+bitfuckit pr comment <repo> <pr-id> "<comment>"
+----
+
+=== `pr diff`
+
+Show the diff for a pull request.
+
+[source,bash]
+----
+bitfuckit pr diff <repo> <pr-id>
 ----
 
 == Mirror Command
@@ -259,6 +358,370 @@ bitfuckit mirror my-repo
 . Adds Bitbucket as a remote
 . Pushes all branches
 . Pushes all tags
+
+== Issue Commands
+
+=== `issue list`
+
+List issues for a repository.
+
+[source,bash]
+----
+bitfuckit issue list <repo> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--state <state>`
+|open
+|Filter: `new`, `open`, `resolved`, `closed`, `all`
+
+|`--kind <type>`
+|all
+|Filter: `bug`, `enhancement`, `proposal`, `task`
+
+|`--priority <level>`
+|all
+|Filter: `trivial`, `minor`, `major`, `critical`, `blocker`
+
+|`--assignee <user>`
+|all
+|Filter by assignee username
+|===
+
+=== `issue create`
+
+Create a new issue.
+
+[source,bash]
+----
+bitfuckit issue create <repo> "<title>" [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--kind <type>`
+|bug
+|Issue type: `bug`, `enhancement`, `proposal`, `task`
+
+|`--priority <level>`
+|major
+|Priority level
+
+|`--content <text>`
+|empty
+|Issue description
+
+|`--assignee <user>`
+|none
+|Assign to user
+
+|`--component <name>`
+|none
+|Component name
+
+|`--milestone <name>`
+|none
+|Milestone name
+|===
+
+=== `issue view`
+
+View issue details.
+
+[source,bash]
+----
+bitfuckit issue view <repo> <issue-id>
+----
+
+=== `issue update`
+
+Update an issue.
+
+[source,bash]
+----
+bitfuckit issue update <repo> <issue-id> [options]
+----
+
+=== `issue comment`
+
+Add a comment to an issue.
+
+[source,bash]
+----
+bitfuckit issue comment <repo> <issue-id> "<comment>"
+----
+
+== Pipeline Commands
+
+=== `pipeline list`
+
+List pipelines for a repository.
+
+[source,bash]
+----
+bitfuckit pipeline list <repo> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--state <state>`
+|all
+|Filter: `SUCCESSFUL`, `FAILED`, `IN_PROGRESS`
+
+|`--branch <name>`
+|all
+|Filter by branch name
+|===
+
+=== `pipeline trigger`
+
+Trigger a pipeline.
+
+[source,bash]
+----
+bitfuckit pipeline trigger <repo> <branch> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--custom <name>`
+|none
+|Custom pipeline name
+
+|`--var <KEY=value>`
+|none
+|Pipeline variable (repeatable)
+|===
+
+=== `pipeline view`
+
+View pipeline details.
+
+[source,bash]
+----
+bitfuckit pipeline view <repo> <uuid>
+----
+
+=== `pipeline logs`
+
+View pipeline logs.
+
+[source,bash]
+----
+bitfuckit pipeline logs <repo> <pipeline-uuid> [step-uuid]
+----
+
+=== `pipeline stop`
+
+Stop a running pipeline.
+
+[source,bash]
+----
+bitfuckit pipeline stop <repo> <uuid>
+----
+
+=== `pipeline vars`
+
+List pipeline variables.
+
+[source,bash]
+----
+bitfuckit pipeline vars <repo>
+----
+
+=== `pipeline var create`
+
+Create a pipeline variable.
+
+[source,bash]
+----
+bitfuckit pipeline var create <repo> <key> <value> [--secured]
+----
+
+== Webhook Commands
+
+=== `webhook list`
+
+List webhooks for a repository.
+
+[source,bash]
+----
+bitfuckit webhook list <repo>
+----
+
+=== `webhook create`
+
+Create a webhook.
+
+[source,bash]
+----
+bitfuckit webhook create <repo> <url> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--description <text>`
+|empty
+|Webhook description
+
+|`--events <list>`
+|repo:push
+|Comma-separated events
+
+|`--secret <text>`
+|none
+|HMAC secret
+|===
+
+=== `webhook delete`
+
+Delete a webhook.
+
+[source,bash]
+----
+bitfuckit webhook delete <repo> <uuid>
+----
+
+=== `webhook enable` / `webhook disable`
+
+Enable or disable a webhook.
+
+[source,bash]
+----
+bitfuckit webhook enable <repo> <uuid>
+bitfuckit webhook disable <repo> <uuid>
+----
+
+== Team Commands
+
+=== `member list`
+
+List workspace members.
+
+[source,bash]
+----
+bitfuckit member list
+----
+
+=== `member invite`
+
+Invite a user to the workspace.
+
+[source,bash]
+----
+bitfuckit member invite <email> [--groups <list>]
+----
+
+=== `group list`
+
+List workspace groups.
+
+[source,bash]
+----
+bitfuckit group list
+----
+
+=== `group create`
+
+Create a group.
+
+[source,bash]
+----
+bitfuckit group create <name> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--permission <level>`
+|read
+|Permission: `read`, `write`, `admin`
+
+|`--auto-add`
+|false
+|Auto-add new members
+|===
+
+=== `permission grant`
+
+Grant repository permission to a user.
+
+[source,bash]
+----
+bitfuckit permission grant <repo> <username> <level>
+----
+
+=== `permission revoke`
+
+Revoke repository permission from a user.
+
+[source,bash]
+----
+bitfuckit permission revoke <repo> <username>
+----
+
+=== `branch-restriction create`
+
+Create a branch restriction.
+
+[source,bash]
+----
+bitfuckit branch-restriction create <repo> <type> [options]
+----
+
+*Options:*
+[cols="2,1,3"]
+|===
+|Option |Default |Description
+
+|`--pattern <glob>`
+|main
+|Branch pattern
+
+|`--users <list>`
+|none
+|Allowed users
+
+|`--groups <list>`
+|none
+|Allowed groups
+|===
+
+=== `default-reviewer add`
+
+Add a default reviewer.
+
+[source,bash]
+----
+bitfuckit default-reviewer add <repo> <username>
+----
+
+=== `deploy-key add`
+
+Add a deploy key.
+
+[source,bash]
+----
+bitfuckit deploy-key add <repo> --key-file <path> --label <name>
+----
 
 == TUI Command
 

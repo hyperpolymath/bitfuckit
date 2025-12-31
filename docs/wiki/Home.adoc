@@ -60,7 +60,11 @@ This tool fills that gap.
 
 * **Authentication** — App password-based authentication with secure storage
 * **Repository CRUD** — Create, list, delete, clone, check existence
-* **Pull Requests** — Create, list, merge, decline, comment on PRs
+* **Pull Requests** — Create, merge, approve, decline, comment on PRs
+* **Issue Tracking** — Full issue CRUD with comments, attachments, watch/vote
+* **Bitbucket Pipelines** — Trigger, monitor, manage variables and schedules
+* **Webhooks** — Create and manage repository and workspace webhooks
+* **Team Management** — Members, groups, permissions, branch restrictions
 * **Git LFS** — Full Large File Storage support with locking
 * **Mirroring** — One-command GitHub-to-Bitbucket mirroring
 * **Interactive TUI** — Vim-style navigation with troubleshooter
@@ -68,14 +72,13 @@ This tool fills that gap.
 * **GraphQL API** — Programmatic access for automation
 * **SPARK Verification** — Formally verified TUI specification
 
-=== v0.2.0 Highlights
+=== v0.5.0 Highlights
 
-* **Resilience** — Circuit breaker pattern, exponential backoff retry
-* **Network Awareness** — Metered connection detection, offline mode
-* **Caching** — API response caching with configurable TTL
-* **Offline Queue** — Queue operations for later execution
-* **TUI Troubleshooter** — Built-in diagnostic tool
-* **Progress Bars** — Visual feedback for long operations
+* **Pull Request Workflows** — Create, merge, approve, decline with inline comments
+* **Issue Tracking** — Full issue management with comments, attachments, history
+* **Bitbucket Pipelines** — Trigger builds, manage variables, environments, schedules
+* **Webhooks** — Repository and workspace webhook management with HMAC secrets
+* **Team Management** — Members, groups, permissions, branch restrictions, deploy keys
 
 == Installation
 
@@ -153,15 +156,15 @@ bitfuckit tui
 |✓ Released
 
 |v0.5.0
-|PR create/merge/decline, Comments, Webhooks
-|In Development
+|PR workflows, Issues, Pipelines, Webhooks, Teams
+|✓ Released
 
 |v0.6.0
-|Issue tracking, Pipelines integration
-|Planned
+|GraphQL Server, Wolfi Container, OAuth2
+|In Development
 
 |v1.0.0
-|Feature parity with gh/glab
+|Windows/macOS, Plugin System, gh/glab parity
 |Planned Q4 2025
 |===
 
