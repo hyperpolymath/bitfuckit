@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0
 # Wolfi-based container for bitfuckit
 # Build: nerdctl build -t bitfuckit:latest .
 # Run: nerdctl run -it --rm bitfuckit:latest --help
@@ -59,6 +59,6 @@ LABEL org.opencontainers.image.title="bitfuckit"
 LABEL org.opencontainers.image.description="The Bitbucket CLI Atlassian never made"
 LABEL org.opencontainers.image.version="0.2.0"
 LABEL org.opencontainers.image.vendor="hyperpolymath"
-LABEL org.opencontainers.image.licenses="AGPL-3.0-or-later"
+LABEL org.opencontainers.image.licenses="PMPL-1.0-or-later"
 LABEL org.opencontainers.image.source="https://github.com/hyperpolymath/bitfuckit"
 LABEL org.opencontainers.image.base.name="cgr.dev/chainguard/wolfi-base"

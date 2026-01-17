@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: PMPL-1.0
 = bitfuckit
 
 link:Home[**🏠 Home**]
@@ -37,4 +37,4 @@ link:Home[**🏠 Home**]
 
 ---
 
-v0.1.0 | AGPL-3.0-or-later
+v0.1.0 | PMPL-1.0-or-later

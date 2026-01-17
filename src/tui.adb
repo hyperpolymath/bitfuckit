@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-License-Identifier: PMPL-1.0
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Characters.Latin_1;

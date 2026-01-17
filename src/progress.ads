@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-License-Identifier: PMPL-1.0
 -- Progress - Progress bar display for CLI operations
 -- Provides visual feedback for long-running operations
 

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: PMPL-1.0
 = Frequently Asked Questions
 :toc: left
 :toclevels: 2
@@ -146,7 +146,7 @@ Priority areas:
 . Additional test coverage
 . Documentation improvements
 
-=== Why AGPL instead of MIT/Apache?
+=== Why AGPL instead of PMPL-1.0/Apache?
 
 The AGPL ensures that if Atlassian (or any company) uses this code in their products, they must contribute improvements back to the community.
 
@@ -159,4 +159,4 @@ If you're building a proprietary product, you'd need to:
 . Open-source your modifications under AGPL
 . Or contact the author about licensing
 
-See https://www.gnu.org/licenses/agpl-3.0.html[AGPL-3.0] for full terms.
+See https://github.com/hyperpolymath/palimpsest-license[PMPL-1.0] for full terms.

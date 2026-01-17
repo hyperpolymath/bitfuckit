@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-License-Identifier: PMPL-1.0
 -- bitfuckit - The Bitbucket CLI Atlassian never made
 -- A fault-tolerant, enterprise-grade Bitbucket CLI in Ada/SPARK
 
@@ -20,7 +20,7 @@ procedure Bitfuckit is
       Put_Line ("bitfuckit " & Version_String);
       Put_Line ("Build: " & Build_Date);
       Put_Line ("Language: Ada/SPARK 2012");
-      Put_Line ("License: AGPL-3.0-or-later");
+      Put_Line ("License: PMPL-1.0-or-later");
       Put_Line ("");
       Put_Line ("Features:");
       Put_Line ("  - Bitbucket Cloud API integration");

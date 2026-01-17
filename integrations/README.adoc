@@ -1,5 +1,8 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: PMPL-1.0
 = bitfuckit Git GUI Integrations
+image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
+
+
 :toc:
 
 This directory contains integration configs for popular FOSS Git GUI tools.

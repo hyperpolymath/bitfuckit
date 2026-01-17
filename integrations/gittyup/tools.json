@@ -1,5 +1,5 @@
 {
-  "_comment": "SPDX-License-Identifier: AGPL-3.0-or-later",
+  "_comment": "SPDX-License-Identifier: PMPL-1.0
   "_description": "Gittyup custom tools for bitfuckit integration",
   "tools": [
     {

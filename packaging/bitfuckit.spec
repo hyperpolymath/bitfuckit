@@ -1,10 +1,10 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0
 Name:           bitfuckit
 Version:        0.1.0
 Release:        1%{?dist}
 Summary:        Bitbucket CLI tool written in Ada
 
-License:        AGPL-3.0-or-later
+License:        PMPL-1.0-or-later
 URL:            https://github.com/hyperpolymath/bitfuckit
 Source0:        %{name}-%{version}.tar.gz
 

@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: AGPL-3.0-or-later
+-- SPDX-License-Identifier: PMPL-1.0
 -- Network_Aware - Metered network detection and intelligent scheduling
 -- Integrates with: complete-linux-internet-repair for self-healing
 

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0
 # Nickel configuration for bitfuckit
 #
 # Cookbook - Common Configuration Patterns:
@@ -35,7 +35,7 @@
     name = "bitfuckit",
     version = "0.1.0",
     language = "ada",
-    license = "AGPL-3.0-or-later",
+    license = "PMPL-1.0",
     description = "Bitbucket CLI tool - the one Atlassian didn't make",
     homepage = "https://github.com/hyperpolymath/bitfuckit",
     repository = "https://github.com/hyperpolymath/bitfuckit",
@@ -186,7 +186,7 @@
       pkgver = "0.1.0",
       pkgrel = 1,
       arch = ["x86_64", "aarch64"],
-      license = "AGPL-3.0-or-later",
+      license = "PMPL-1.0",
       depends = ["curl"],
       makedepends = ["gcc-ada", "gprbuild"],
       source = "https://github.com/hyperpolymath/bitfuckit/archive/v\${pkgver}.tar.gz",
@@ -230,7 +230,7 @@
       name = "bitfuckit",
       version = "0.1.0",
       publisher = "hyperpolymath",
-      license = "AGPL-3.0-or-later",
+      license = "PMPL-1.0",
     },
   },
 

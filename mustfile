@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0
 # mustfile for bitfuckit - declarative build requirements
 #
 # Mustfile defines WHAT must be done, justfile defines HOW
@@ -7,7 +7,7 @@
 [project]
 name = "bitfuckit"
 version = "0.1.0"
-license = "AGPL-3.0-or-later"
+license = "PMPL-1.0"
 description = "Bitbucket CLI tool written in Ada"
 
 [build]
@@ -98,7 +98,7 @@ name = "bitfuckit"
 pkgver = "0.1.0"
 pkgrel = 1
 arch = ["x86_64", "aarch64"]
-license = "AGPL-3.0-or-later"
+license = "PMPL-1.0"
 depends = ["curl"]
 makedepends = ["gcc-ada", "gprbuild"]
 source = "https://github.com/hyperpolymath/bitfuckit/archive/v${pkgver}.tar.gz"

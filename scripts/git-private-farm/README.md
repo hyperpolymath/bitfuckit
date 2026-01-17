@@ -1,4 +1,7 @@
 # .git-private-farm
+[![License](https://img.shields.io/badge/license-PMPL--1.0-blue.svg)](https://github.com/hyperpolymath/palimpsest-license)
+
+
 
 Private orchestration hub for rapid multi-forge propagation.
 

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: PMPL-1.0
 = bitfuckit Wiki
 :toc: right
 :toclevels: 2
@@ -7,7 +7,7 @@
 
 image::https://img.shields.io/badge/language-Ada-blue[Ada]
 image::https://img.shields.io/badge/SPARK-verified-green[SPARK]
-image::https://img.shields.io/badge/license-AGPL--3.0--or--later-blue[License]
+image::https://img.shields.io/badge/license-PMPL--1.0[License]
 
 Welcome to the **bitfuckit** wiki — comprehensive documentation for the Bitbucket CLI that Atlassian never made.
 
@@ -162,4 +162,4 @@ bitfuckit tui
 
 == License
 
-AGPL-3.0-or-later — If Atlassian wants to use this, they contribute back. Fair's fair.
+PMPL-1.0-or-later — If Atlassian wants to use this, they contribute back. Fair's fair.

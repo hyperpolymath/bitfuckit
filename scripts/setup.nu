@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0
 # bitfuckit one-click setup for Nushell
 
 let install_dir = ($env.INSTALL_DIR? | default ($env.HOME | path join ".local" "bin"))

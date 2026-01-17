@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0
 # Maintainer: hyperpolymath <hyperpolymath@users.noreply.github.com>
 pkgname=bitfuckit
 pkgver=0.1.0
@@ -6,7 +6,7 @@ pkgrel=1
 pkgdesc="Bitbucket CLI tool written in Ada"
 arch=('x86_64')
 url="https://github.com/hyperpolymath/bitfuckit"
-license=('AGPL-3.0-or-later')
+license=('PMPL-1.0-or-later')
 depends=('curl')
 makedepends=('gcc-ada' 'gprbuild')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/$pkgname/archive/v$pkgver.tar.gz")
