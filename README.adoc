@@ -560,7 +560,7 @@ Atlassian—a company valued at over $50 billion USD—has provided no official 
 
 Every other major git forge recognized that developers live in the terminal and provided first-class CLI tooling. Atlassian apparently disagrees, or simply doesn't care enough to allocate engineering resources to what has become a basic expectation for modern developer tooling.
 
-This tool exists because the gap in functionality was too large to ignore. It was built out of necessity, not passion. The AGPL license ensures that if Atlassian ever decides to incorporate any of this work, they must contribute back to the community they have thus far neglected to serve.
+This tool exists because the gap in functionality was too large to ignore. It was built out of necessity, not passion. The PMPL license ensures that if Atlassian ever decides to incorporate any of this work, they must contribute back to the community they have thus far neglected to serve.
 
 We remain hopeful that Atlassian will eventually prioritize developer experience over enterprise feature bloat and provide an official CLI. Until then, `bitfuckit` will continue to fill the void.
 ====
