@@ -1,4 +1,4 @@
-; SPDX-License-Identifier: PMPL-1.0
+; SPDX-License-Identifier: MPL-2.0-or-later
 ; ECOSYSTEM.scm - Project's place in the ecosystem
 
 (ecosystem
@@ -26,7 +26,7 @@
       (rad "Radicle CLI"))
 
     (potential-consumer
-      (gitvisor "Git supervisor tool that could orchestrate forge CLIs")
+      (git-hud "Git supervisor tool that could orchestrate forge CLIs")
       (robot-repo-cleaner "Repo maintenance that could use bitfuckit for Bitbucket ops"))
 
     (inspiration
