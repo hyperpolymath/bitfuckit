@@ -1,5 +1,5 @@
 # .git-private-farm
-[![License](https://img.shields.io/badge/license-PMPL--1.0-blue.svg)](https://github.com/hyperpolymath/palimpsest-license)
+image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[MPL-2.0-or-later,link="https://opensource.org/licenses/MPL-2.0"]
 
 
 

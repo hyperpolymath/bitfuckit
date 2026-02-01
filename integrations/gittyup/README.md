@@ -1,5 +1,5 @@
-# SPDX-License-Identifier: PMPL-1.0
-[![License](https://img.shields.io/badge/license-PMPL--1.0-blue.svg)](https://github.com/hyperpolymath/palimpsest-license)
+# SPDX-License-Identifier: MPL-2.0-or-later
+image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[MPL-2.0-or-later,link="https://opensource.org/licenses/MPL-2.0"]
 
 
 

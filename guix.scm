@@ -1,4 +1,4 @@
-;;; SPDX-License-Identifier: PMPL-1.0
+;;; SPDX-License-Identifier: MPL-2.0-or-later
 ;;; Guix package definition for bitfuckit
 ;;; Usage: guix build -f guix.scm
 ;;; Or add channel: https://github.com/hyperpolymath/guix-channel

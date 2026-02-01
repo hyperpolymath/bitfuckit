@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MPL-2.0-or-later
 # Rapid Propagation Workflow
 # Pushes changes from GitHub to all configured forges in parallel
 
