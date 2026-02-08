@@ -1,8 +1,6 @@
-image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[MPL-2.0-or-later,link="https://opensource.org/licenses/MPL-2.0"]
-image:https://img.shields.io/badge/Philosophy-Palimpsest-indigo.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-license"]
+image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
 
-
-// SPDX-License-Identifier: MPL-2.0-or-later
+// SPDX-License-Identifier: PMPL-1.0
 = bitfuckit
 
 
@@ -18,12 +16,6 @@ Bitbucket CLI tool written in Ada. They didn't make one. I had to.
 
 image:https://img.shields.io/badge/language-Ada-blue[Ada]
 image:https://img.shields.io/badge/SPARK-verified-green[SPARK]
-
-== License & Philosophy
-
-This project must declare **MPL-2.0-or-later** for platform/tooling compatibility.
-
-Philosophy: **Palimpsest**. The Palimpsest-MPL (PMPL) text is provided in `license/PMPL-1.0.txt`, and the canonical source is the palimpsest-license repository.
 image:https://img.shields.io/badge/GraphQL-API-e10098[GraphQL]
 
 toc::[]
@@ -532,7 +524,7 @@ Contributions welcome! Please:
 
 == License
 
-SPDX-License-Identifier: MPL-2.0-or-later
+SPDX-License-Identifier: PMPL-1.0
 
 Copyright (C) 2025 hyperpolymath
 
@@ -568,7 +560,7 @@ Atlassian—a company valued at over $50 billion USD—has provided no official 
 
 Every other major git forge recognized that developers live in the terminal and provided first-class CLI tooling. Atlassian apparently disagrees, or simply doesn't care enough to allocate engineering resources to what has become a basic expectation for modern developer tooling.
 
-This tool exists because the gap in functionality was too large to ignore. It was built out of necessity, not passion. The AGPL license ensures that if Atlassian ever decides to incorporate any of this work, they must contribute back to the community they have thus far neglected to serve.
+This tool exists because the gap in functionality was too large to ignore. It was built out of necessity, not passion. The PMPL license ensures that if Atlassian ever decides to incorporate any of this work, they must contribute back to the community they have thus far neglected to serve.
 
 We remain hopeful that Atlassian will eventually prioritize developer experience over enterprise feature bloat and provide an official CLI. Until then, `bitfuckit` will continue to fill the void.
 ====
