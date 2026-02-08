@@ -32,6 +32,9 @@ gnatinspect.db
 .env
 .env.*
 
+# Bug reports with sensitive data
+BITFUCKIT-BUG-REPORT.md
+
 # OS artifacts
 .DS_Store
 Thumbs.db
