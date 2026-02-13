@@ -48,3 +48,6 @@ Thumbs.db
 coverage/
 *.gcov
 *.lcov
+
+# Crash recovery artifacts
+ai-cli-crash-capture/
