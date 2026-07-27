@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-// {{PROJECT}} FFI Implementation
+// bitfuckit FFI Implementation
 //
 // This module implements the C-compatible FFI declared in src/abi/Foreign.idr
 // All types and layouts must match the Idris2 ABI definitions.
@@ -10,7 +10,7 @@ const std = @import("std");
 
 // Version information (keep in sync with project)
 const VERSION = "0.1.0";
-const BUILD_INFO = "{{PROJECT}} built with Zig " ++ @import("builtin").zig_version_string;
+const BUILD_INFO = "bitfuckit built with Zig " ++ @import("builtin").zig_version_string;
 
 /// Thread-local error storage
 threadlocal var last_error: ?[]const u8 = null;
@@ -38,9 +38,12 @@ pub const Result = enum(c_int) {
     null_pointer = 4,
 };
 
-/// Library handle (opaque to prevent direct access)
-pub const Handle = opaque {
-    // Internal state hidden from C
+/// Library handle. Opaque to C callers (they only ever see `*Handle`, never
+/// its layout — the generated header declares it as an incomplete struct);
+/// concrete on the Zig side because Zig must know the size to allocate it.
+/// (Zig's `opaque {}` keyword is for the reverse direction — importing a type
+/// whose layout Zig itself doesn't know — so it doesn't apply here.)
+pub const Handle = struct {
     allocator: std.mem.Allocator,
     initialized: bool,
     // Add your fields here
@@ -52,8 +55,12 @@ pub const Handle = opaque {
 
 /// Initialize the library
 /// Returns a handle, or null on failure
-export fn {{project}}_init() ?*Handle {
-    const allocator = std.heap.c_allocator;
+export fn bitfuckit_init() ?*Handle {
+    // page_allocator rather than c_allocator: avoids an implicit libc
+    // dependency that build.zig does not currently link. Safe because every
+    // allocation here is freed only through this library's own
+    // bitfuckit_free/bitfuckit_free_string, never via external free().
+    const allocator = std.heap.page_allocator;
 
     const handle = allocator.create(Handle) catch {
         setError("Failed to allocate handle");
@@ -71,7 +78,7 @@ export fn {{project}}_init() ?*Handle {
 }
 
 /// Free the library handle
-export fn {{project}}_free(handle: ?*Handle) void {
+export fn bitfuckit_free(handle: ?*Handle) void {
     const h = handle orelse return;
     const allocator = h.allocator;
 
@@ -87,7 +94,7 @@ export fn {{project}}_free(handle: ?*Handle) void {
 //==============================================================================
 
 /// Process data (example operation)
-export fn {{project}}_process(handle: ?*Handle, input: u32) Result {
+export fn bitfuckit_process(handle: ?*Handle, input: u32) Result {
     const h = handle orelse {
         setError("Null handle");
         return .null_pointer;
@@ -111,7 +118,7 @@ export fn {{project}}_process(handle: ?*Handle, input: u32) Result {
 
 /// Get a string result (example)
 /// Caller must free the returned string
-export fn {{project}}_get_string(handle: ?*Handle) ?[*:0]const u8 {
+export fn bitfuckit_get_string(handle: ?*Handle) ?[*:0]const u8 {
     const h = handle orelse {
         setError("Null handle");
         return null;
@@ -133,9 +140,9 @@ export fn {{project}}_get_string(handle: ?*Handle) ?[*:0]const u8 {
 }
 
 /// Free a string allocated by the library
-export fn {{project}}_free_string(str: ?[*:0]const u8) void {
+export fn bitfuckit_free_string(str: ?[*:0]const u8) void {
     const s = str orelse return;
-    const allocator = std.heap.c_allocator;
+    const allocator = std.heap.page_allocator;
 
     const slice = std.mem.span(s);
     allocator.free(slice);
@@ -146,7 +153,7 @@ export fn {{project}}_free_string(str: ?[*:0]const u8) void {
 //==============================================================================
 
 /// Process an array of data
-export fn {{project}}_process_array(
+export fn bitfuckit_process_array(
     handle: ?*Handle,
     buffer: ?[*]const u8,
     len: u32,
@@ -182,11 +189,11 @@ export fn {{project}}_process_array(
 
 /// Get the last error message
 /// Returns null if no error
-export fn {{project}}_last_error() ?[*:0]const u8 {
+export fn bitfuckit_last_error() ?[*:0]const u8 {
     const err = last_error orelse return null;
 
     // Return C string (static storage, no need to free)
-    const allocator = std.heap.c_allocator;
+    const allocator = std.heap.page_allocator;
     const c_str = allocator.dupeZ(u8, err) catch return null;
     return c_str.ptr;
 }
@@ -196,12 +203,12 @@ export fn {{project}}_last_error() ?[*:0]const u8 {
 //==============================================================================
 
 /// Get the library version
-export fn {{project}}_version() [*:0]const u8 {
+export fn bitfuckit_version() [*:0]const u8 {
     return VERSION.ptr;
 }
 
 /// Get build information
-export fn {{project}}_build_info() [*:0]const u8 {
+export fn bitfuckit_build_info() [*:0]const u8 {
     return BUILD_INFO.ptr;
 }
 
@@ -210,10 +217,10 @@ export fn {{project}}_build_info() [*:0]const u8 {
 //==============================================================================
 
 /// Callback function type (C ABI)
-pub const Callback = *const fn (u64, u32) callconv(.C) u32;
+pub const Callback = *const fn (u64, u32) callconv(.c) u32;
 
 /// Register a callback
-export fn {{project}}_register_callback(
+export fn bitfuckit_register_callback(
     handle: ?*Handle,
     callback: ?Callback,
 ) Result {
@@ -244,7 +251,7 @@ export fn {{project}}_register_callback(
 //==============================================================================
 
 /// Check if handle is initialized
-export fn {{project}}_is_initialized(handle: ?*Handle) u32 {
+export fn bitfuckit_is_initialized(handle: ?*Handle) u32 {
     const h = handle orelse return 0;
     return if (h.initialized) 1 else 0;
 }
@@ -254,22 +261,22 @@ export fn {{project}}_is_initialized(handle: ?*Handle) u32 {
 //==============================================================================
 
 test "lifecycle" {
-    const handle = {{project}}_init() orelse return error.InitFailed;
-    defer {{project}}_free(handle);
+    const handle = bitfuckit_init() orelse return error.InitFailed;
+    defer bitfuckit_free(handle);
 
-    try std.testing.expect({{project}}_is_initialized(handle) == 1);
+    try std.testing.expect(bitfuckit_is_initialized(handle) == 1);
 }
 
 test "error handling" {
-    const result = {{project}}_process(null, 0);
+    const result = bitfuckit_process(null, 0);
     try std.testing.expectEqual(Result.null_pointer, result);
 
-    const err = {{project}}_last_error();
+    const err = bitfuckit_last_error();
     try std.testing.expect(err != null);
 }
 
 test "version" {
-    const ver = {{project}}_version();
+    const ver = bitfuckit_version();
     const ver_str = std.mem.span(ver);
     try std.testing.expectEqualStrings(VERSION, ver_str);
 }

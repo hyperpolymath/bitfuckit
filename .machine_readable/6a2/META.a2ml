@@ -9,8 +9,8 @@ version = "0.1.0"
 last-updated = "2026-04-11"
 
 [project-info]
-type = "library"  # TODO: update type (library|binary|service|website|monorepo)  # library | binary | monorepo | service | website
-languages = []             # e.g. ["rust", "zig", "idris2"]
+type = "library"  # library | binary | monorepo | service | website — ABI/FFI library consumed by the reposystem audit pipeline
+languages = ["idris2", "zig"]
 license = "MPL-2.0"
 author = "Jonathan D.A. Jewell (hyperpolymath)"
 
