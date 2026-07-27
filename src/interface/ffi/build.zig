@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MPL-2.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //
-// Template FFI Build Configuration (Zig 0.15.2+)
-// Note: This is a minimal build file that demonstrates Zig integration
+// bitfuckit FFI Build Configuration (Zig 0.15.2+, verified against 0.16.0)
+// Note: This is a minimal build file — it type-checks the FFI sources via
+// `zig fmt`/`zig test` invocations from the Justfile. No library artifact is
+// produced yet (see Justfile `build` recipe).
 
 const std = @import("std");
 

@@ -11,14 +11,15 @@ Get up and running in 60 seconds.
 * just (command runner)
 * Your language toolchain (see Justfile for details)
 
-== From Template (New Project)
+== Clone and Build
 
 [source,bash]
 ----
-git clone https://github.com/{{OWNER}}/rsr-template-repo my-project
-cd my-project
-rm -rf .git && git init -b main
-just init       # interactive placeholder replacement
+git clone https://github.com/hyperpolymath/bitfuckit
+cd bitfuckit
+just deps       # check zig + idris2 are present
+just build      # zig build in src/interface/ffi
+just test       # zig test src/main.zig + test/integration_test.zig
 ----
 
 == Project Structure

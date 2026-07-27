@@ -7,14 +7,16 @@
 # applied by the probot/settings app when changes are pushed to the default
 # branch. Install the app at: https://github.com/apps/settings
 #
-# Template file — replace {{REPO}} and {{DESCRIPTION}} with actual values.
+# Instantiated for bitfuckit — an unsubstituted `name: "{{REPO}}"` here would
+# make probot/settings try to rename the repo to the literal string "{{REPO}}"
+# on the next push to main. Keep this in sync if the repo is ever renamed.
 
 # ─── Repository Settings ───────────────────────────────────────────────────────
 
 repository:
-  name: "{{REPO}}"
-  description: "{{DESCRIPTION}}"
-  homepage: "https://github.com/hyperpolymath/{{REPO}}"
+  name: "bitfuckit"
+  description: "Ada/SPARK repository auditor (health, compliance, security posture)"
+  homepage: "https://github.com/hyperpolymath/bitfuckit"
   private: false
   has_issues: true
   has_projects: true

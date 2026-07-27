@@ -1,18 +1,17 @@
 # SPDX-License-Identifier: MPL-2.0
-# Dustfile — Cleanup and hygiene contract for rsr-template-repo
+# Dustfile — Cleanup and hygiene contract for bitfuckit
 # Author: Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 #
 # Paired runner: dust.ncl
 # Verb:          dust
 # Semantics:     What should be cleaned up. Housekeeping, not blockers.
 #
-# This repository: rsr-template-repo is the canonical template.
-# Cleanup items here ensure the template itself remains pristine.
+# This repository: bitfuckit, instantiated from rsr-template-repo (the
+# canonical template).
 
 @abstract:
-Cleanup and hygiene items for rsr-template-repo. These are maintenance tasks
-that ensure the template repository remains clean and ready for distribution
-to new repositories.
+Cleanup and hygiene items for bitfuckit. These are maintenance tasks that
+ensure the repository remains clean.
 @end
 
 ## Stale Files
@@ -54,7 +53,7 @@ to new repositories.
 - description: No references to rsr-template-repo in generic template files
 - run: test -z "$(grep -r 'rsr-template-repo' machine-readable-design/ 2>/dev/null)"
 - severity: warning
-- notes: Generic templates should use {{PROJECT_NAME}} or similar placeholders
+- notes: Generic templates should use bitfuckit or similar placeholders
 
 ### version-sync-checked
 - description: Version in canonical-directory-structure matches .machine_readable/contractiles
