@@ -1,30 +1,40 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-// Template: QUICKSTART-MAINTAINER.adoc — packaging, deploying, and maintaining
-// Replace rsr-template-repo, {{PACKAGE_NAME}}, {{DEPS}} with actuals
-= rsr-template-repo — Quick Start for Platform Maintainers
+= bitfuckit — Quick Start for Platform Maintainers
 :toc:
 :toclevels: 2
 
+[NOTE]
+====
+bitfuckit does not yet build an installable artifact — `build.zig` type-checks
+the FFI layer but defines no library/executable target (see
+`src/interface/ffi/build.zig`), and the `run`/`install` Justfile recipes were
+removed rather than left as non-functional stubs (see `Justfile`). The
+packaging/deployment steps below are inherited from the RSR template and
+describe where this repo is headed, not what works today. For what actually
+works right now, see `docs/onboarding/QUICKSTART-DEV.adoc` (`just build`,
+`just test`).
+====
+
 == Overview
 
-This guide covers packaging, deploying, and maintaining rsr-template-repo for
-distribution on your platform.
+This guide covers packaging, deploying, and maintaining bitfuckit for
+distribution on your platform, once it has a real build artifact to package.
 
 == Runtime Dependencies
 
-{{DEPS}}
+Zig 0.16.0, Idris2 (for ABI/type proofs)
 
 == Build from Source
 
 [source,bash]
 ----
-git clone https://github.com/hyperpolymath/rsr-template-repo.git
-cd rsr-template-repo
+git clone https://github.com/hyperpolymath/bitfuckit.git
+cd bitfuckit
 just build-release
 ----
 
-Output: `{{BUILD_OUTPUT_PATH}}`
+Output: `src/interface/ffi/zig-out/`
 
 == Packaging
 
@@ -47,7 +57,7 @@ nix build
 [source,bash]
 ----
 just stapeln-export    # Generates Containerfile
-podman build -t rsr-template-repo .
+podman build -t bitfuckit .
 ----
 
 === Manual Package
@@ -66,10 +76,10 @@ Files installed:
 | `$PREFIX/bin/`
 | Executables
 
-| `$PREFIX/share/{{PACKAGE_NAME}}/`
+| `$PREFIX/share/bitfuckit/`
 | Data files, assets
 
-| `$PREFIX/share/doc/{{PACKAGE_NAME}}/`
+| `$PREFIX/share/doc/bitfuckit/`
 | Documentation
 
 | `$PREFIX/share/applications/`
@@ -81,9 +91,9 @@ Files installed:
 
 == Configuration
 
-Default config location: `$XDG_CONFIG_HOME/{{PACKAGE_NAME}}/config.toml`
+Default config location: `$XDG_CONFIG_HOME/bitfuckit/config.toml`
 
-Fallback: `$HOME/.config/{{PACKAGE_NAME}}/config.toml`
+Fallback: `$HOME/.config/bitfuckit/config.toml`
 
 == Health Checks
 
@@ -103,7 +113,7 @@ just build-release
 just install --prefix=/usr/local
 ----
 
-Or via OPSM: `opsm update {{PACKAGE_NAME}}`
+Or via OPSM: `opsm update bitfuckit`
 
 == Security Notes
 
@@ -118,13 +128,13 @@ For deploying multiple instances (e.g., different users or tenants):
 
 [source,bash]
 ----
-just install --prefix=/opt/{{PACKAGE_NAME}}-instance1 --config=/etc/{{PACKAGE_NAME}}/instance1.toml
-just install --prefix=/opt/{{PACKAGE_NAME}}-instance2 --config=/etc/{{PACKAGE_NAME}}/instance2.toml
+just install --prefix=/opt/bitfuckit-instance1 --config=/etc/bitfuckit/instance1.toml
+just install --prefix=/opt/bitfuckit-instance2 --config=/etc/bitfuckit/instance2.toml
 ----
 
 Each instance has isolated config, data, and logs.
 
 == Reporting Issues
 
-* Upstream: https://github.com/hyperpolymath/rsr-template-repo/issues
+* Upstream: https://github.com/hyperpolymath/bitfuckit/issues
 * With diagnostic: `just help-me` (pre-fills context)

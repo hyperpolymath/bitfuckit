@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
-# Bustfile — failure mode contractile for rsr-template-repo
+# Bustfile — failure mode contractile for bitfuckit
 # Author: Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 #
 # Paired runner: bust.ncl
@@ -13,13 +13,17 @@
 #   contractile bust check  → list failure modes + recovery status
 #   contractile bust drill  → inject failures, verify recovery paths
 #
-# This repository: rsr-template-repo is the canonical template for RSR compliance.
-# Failure modes here relate to template distribution and substitution.
+# This repository: bitfuckit, instantiated from rsr-template-repo (the
+# canonical template for RSR compliance). The failure modes below were
+# inherited from the template and describe *template* distribution/
+# substitution failure modes, not bitfuckit-specific ones — flagged here
+# rather than silently retained; a bitfuckit-specific pass is follow-up work.
 
 @abstract:
-Bustfile for rsr-template-repo. Lists failure modes specific to the template
-repository itself, particularly around template distribution, substitution,
-and synchronization across the hyperpolymath estate.
+Bustfile for bitfuckit. Lists failure modes inherited from rsr-template-repo,
+particularly around template distribution, substitution, and synchronization
+across the hyperpolymath estate — most of which describe the template's own
+failure modes rather than bitfuckit's as an Ada/SPARK repository auditor.
 @end
 
 ## Failure Modes
