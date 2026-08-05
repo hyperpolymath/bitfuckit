@@ -7,8 +7,8 @@
 # applied by the probot/settings app when changes are pushed to the default
 # branch. Install the app at: https://github.com/apps/settings
 #
-# Instantiated for bitfuckit — an unsubstituted `name: "{{REPO}}"` here would
-# make probot/settings try to rename the repo to the literal string "{{REPO}}"
+# Instantiated for bitfuckit — an unsubstituted `name: "bitfuckit"` here would
+# make probot/settings try to rename the repo to the literal string "bitfuckit"
 # on the next push to main. Keep this in sync if the repo is ever renamed.
 
 # ─── Repository Settings ───────────────────────────────────────────────────────
