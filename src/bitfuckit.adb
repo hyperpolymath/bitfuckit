@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: PMPL-1.0-or-later
+-- SPDX-License-Identifier: MPL-2.0
 -- Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath)
 --
 -- bitfuckit - The Bitbucket CLI Atlassian never made
@@ -31,7 +31,7 @@ procedure Bitfuckit is
       Put_Line ("bitfuckit " & Version_String);
       Put_Line ("Build: " & Build_Date);
       Put_Line ("Language: Ada/SPARK 2012");
-      Put_Line ("License: PMPL-1.0-or-later");
+      Put_Line ("License: MPL-2.0");
       Put_Line ("");
       Put_Line ("Features:");
       Put_Line ("  - Bitbucket Cloud API integration");

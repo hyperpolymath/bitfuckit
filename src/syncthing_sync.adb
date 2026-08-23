@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: PMPL-1.0-or-later
+-- SPDX-License-Identifier: MPL-2.0
 -- Syncthing_Sync implementation
 
 with GNAT.OS_Lib; use type GNAT.OS_Lib.String_Access;

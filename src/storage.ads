@@ -1,4 +1,4 @@
--- SPDX-License-Identifier: PMPL-1.0-or-later
+-- SPDX-License-Identifier: MPL-2.0
 -- Storage - Persistent storage abstraction with CubsDB and OpenTimestamp
 -- Provides robust, timestamped, verifiable storage for bitfuckit
 

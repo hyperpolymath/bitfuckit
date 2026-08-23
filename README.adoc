@@ -1,6 +1,6 @@
 image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
 
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: CC-BY-SA-4.0
 = bitfuckit
 
 
@@ -611,7 +611,7 @@ Contributions welcome! Please:
 
 == License
 
-SPDX-License-Identifier: PMPL-1.0-or-later
+SPDX-License-Identifier: CC-BY-SA-4.0
 
 Copyright (C) 2025-2026 Jonathan D.A. Jewell (hyperpolymath)
 

@@ -162,4 +162,4 @@ bitfuckit tui
 
 == License
 
-PMPL-1.0-or-later — If Atlassian wants to use this, they contribute back. Fair's fair.
+CC-BY-SA-4.0 — If Atlassian wants to use this, they contribute back. Fair's fair.
