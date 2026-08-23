@@ -19,7 +19,7 @@ permissions:
   contents: read
 
 jobs:
-  # The estate is heterogeneous (Rust, Idris2, Agda, Elixir, ReScript,
+  # The estate is heterogeneous (Rust, Idris2, Agda, Elixir, AffineScript,
   # occasional JS/TS/Python). A hard-coded `javascript-typescript` matrix
   # made CodeQL exit with a "no source / configuration error" on every
   # non-JS/TS repo — a permanent false-red `analyze` on most repos' main.

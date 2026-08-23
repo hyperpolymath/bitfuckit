@@ -113,8 +113,8 @@ just install-full
 |`brew install bitfuckit`
 |Planned
 
-|Nix
-|`nix-env -iA nixpkgs.bitfuckit`
+|Guix
+|`guix-env -iA nixpkgs.bitfuckit`
 |Planned
 |===
 

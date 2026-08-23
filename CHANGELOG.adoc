@@ -27,6 +27,6 @@ and this project adheres to https://semver.org/[Semantic Versioning].
 * SPARK-verified TUI specification
 * Man page (`doc/bitfuckit.1`)
 * Shell completions (bash, zsh, fish)
-* Packaging files (RPM spec, Arch PKGBUILD, Nix flake)
+* Packaging files (RPM spec, Arch PKGBUILD, Guix flake)
 * Justfile for common tasks
 * SCM checkpoint files (META, ECOSYSTEM, STATE, AGENTIC, NEUROSYM, PLAYBOOK)

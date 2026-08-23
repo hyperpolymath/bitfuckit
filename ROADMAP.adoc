@@ -297,7 +297,7 @@ v1.0.0 = Feature parity with gh/glab + Production-ready
 |☐
 |✓
 
-|Nix/NixOS
+|Guix/NixOS
 |☐
 |✓
 
@@ -358,7 +358,7 @@ See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc].
 Priority areas:
 1. GraphQL server completion
 2. Windows testing
-3. Package formats (Homebrew, Nix)
+3. Package formats (Homebrew, Guix)
 4. SPARK expansion
 5. OAuth2 implementation
 

@@ -145,8 +145,8 @@ sudo cp bin/bitfuckit /usr/local/bin/
 |`yay -S bitfuckit`
 |Planned
 
-|Nix
-|`nix-env -iA nixpkgs.bitfuckit`
+|Guix
+|`guix-env -iA nixpkgs.bitfuckit`
 |Planned
 
 |Homebrew
@@ -188,7 +188,7 @@ Store your Bitbucket credentials in the https://github.com/hyperpolymath/reasona
 [source,bash]
 ----
 # Install svalinn-cli (if not already installed)
-nix profile install github:hyperpolymath/reasonably-good-token-vault
+guix profile install github:hyperpolymath/reasonably-good-token-vault
 
 # Initialize and unlock the vault
 svalinn-cli init
