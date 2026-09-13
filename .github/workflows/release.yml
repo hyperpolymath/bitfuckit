@@ -38,7 +38,7 @@ jobs:
             LICENSE
 
       - name: Create Release
-        uses: softprops/action-gh-release@v3.0.2
+        uses: softprops/action-gh-release@v3.0.3
         with:
           files: dist/*
           generate_release_notes: true
