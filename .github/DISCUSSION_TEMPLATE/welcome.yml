@@ -24,7 +24,7 @@ body:
         ## Contributing
 
         We welcome contributions! This project is written in Ada/SPARK for reliability.
-        Check out [CONTRIBUTING.adoc](../CONTRIBUTING.adoc) to get started.
+        Check out [../../.github/CONTRIBUTING.md](../../.github/CONTRIBUTING.md) to get started.
 
         ## Code of Conduct
 
