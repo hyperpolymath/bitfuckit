@@ -175,7 +175,7 @@ guix install bitfuckit
 
 [source,bash]
 ----
-guix install -f guix.scm
+guix install -f build/guix.scm
 ----
 
 == Shell Completions

@@ -245,7 +245,7 @@
       release = ["ci", "package-all", "mirror-self"],
     },
 
-    required_files = ["README.adoc", "LICENSE", "SECURITY.md", "CONTRIBUTING.adoc"],
+    required_files = ["README.adoc", "LICENSE", "SECURITY.md", ".github/CONTRIBUTING.md"],
   },
 
   # ============================================================================

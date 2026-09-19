@@ -353,7 +353,7 @@ v1.0.0 = Feature parity with gh/glab + Production-ready
 
 == Contributing
 
-See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc].
+See link:.github/CONTRIBUTING.md[.github/CONTRIBUTING.md].
 
 Priority areas:
 1. GraphQL server completion

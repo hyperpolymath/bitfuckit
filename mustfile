@@ -77,7 +77,7 @@ security = ["verify", "lint.secrets"]
 README = "README.adoc"
 LICENSE = "LICENSE"
 SECURITY = "SECURITY.md"
-CONTRIBUTING = "CONTRIBUTING.adoc"
+CONTRIBUTING = ".github/CONTRIBUTING.md"
 CHANGELOG = "CHANGELOG.adoc"
 ROADMAP = "ROADMAP.adoc"
 
