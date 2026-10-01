@@ -35,10 +35,7 @@ workflows:
         - 'actions/checkout@v7.0.1'
         - 'github/codeql-action@v4.38.0'
         - 'ossf/scorecard-action@v2.4.4'
-    '.github/workflows/secret-scanner.yml':
-        - 'actions/checkout@v7.0.1'
-        - 'gitleaks/gitleaks-action@v3.0.0'
-        - 'trufflesecurity/trufflehog@v3.97.4'
+    '.github/workflows/secret-scanner.yml': []
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
