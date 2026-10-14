@@ -7,14 +7,14 @@ workflows:
         - 'actions/checkout@v7.0.1'
     '.github/workflows/codeql.yml':
         - 'actions/checkout@v7.0.1'
-        - 'github/codeql-action@v4.38.0'
+        - 'github/codeql-action@v4.38.3'
     '.github/workflows/governance.yml': []
     '.github/workflows/hypatia-scan.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/github-script@v9.0.0'
-        - 'actions/upload-artifact@v7.0.1'
+        - 'actions/upload-artifact@v7.0.2'
         - 'erlef/setup-beam@v1.24.1'
-        - 'github/codeql-action@v4.38.0'
+        - 'github/codeql-action@v4.38.3'
     '.github/workflows/instant-sync.yml':
         - 'peter-evans/repository-dispatch@v4.0.1'
     '.github/workflows/label-triage.yml': []
@@ -33,7 +33,7 @@ workflows:
         - 'softprops/action-gh-release@v3.0.3'
     '.github/workflows/scorecard.yml':
         - 'actions/checkout@v7.0.1'
-        - 'github/codeql-action@v4.38.2'
+        - 'github/codeql-action@v4.38.3'
         - 'ossf/scorecard-action@v2.5.0'
     '.github/workflows/secret-scanner.yml': []
 dependencies:
@@ -47,9 +47,9 @@ dependencies:
         commit: 'sha1-3a2844b7e9c422d3c10d287c895573f7108da1b3'
         owner_id: 44036562
         repo_id: 205262760
-    'actions/upload-artifact@v7.0.1':
-        ref: 'v7.0.1'
-        commit: 'sha1-043fb46d1a93c77aae656e7c1c64a875d1fc6a0a'
+    'actions/upload-artifact@v7.0.2':
+        ref: 'v7.0.2'
+        commit: 'sha1-cf430e030ddbb5b0abf93d22962f4752f3646cd9'
         owner_id: 44036562
         repo_id: 192625955
     'docker/build-push-action@v7.4.0':
@@ -77,14 +77,9 @@ dependencies:
         commit: 'sha1-54075bcc5e249e4758d363f27d099f55d843f124'
         owner_id: 47606891
         repo_id: 331103973
-    'github/codeql-action@v4.38.0':
-        ref: 'v4.38.0'
-        commit: 'sha1-b96794f015dfd88f77b49b1c93e0fa7110f94c63'
-        owner_id: 9919
-        repo_id: 259445878
-    'github/codeql-action@v4.38.2':
-        ref: 'v4.38.2'
-        commit: 'sha1-2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2'
+    'github/codeql-action@v4.38.3':
+        ref: 'v4.38.3'
+        commit: 'sha1-24c54180a607b1449ed407dd24f251e4e9147c8d'
         owner_id: 9919
         repo_id: 259445878
     'ossf/scorecard-action@v2.5.0':
