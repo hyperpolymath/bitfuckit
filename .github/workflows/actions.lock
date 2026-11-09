@@ -30,7 +30,7 @@ workflows:
         - 'docker/metadata-action@v6.2.0'
     '.github/workflows/release.yml':
         - 'actions/checkout@v7.0.1'
-        - 'softprops/action-gh-release@v3.0.3'
+        - 'softprops/action-gh-release@v3.0.4'
     '.github/workflows/scorecard.yml':
         - 'actions/checkout@v7.0.1'
         - 'github/codeql-action@v4.38.3'
@@ -92,9 +92,9 @@ dependencies:
         commit: 'sha1-28959ce8df70de7be546dd1250a005dd32156697'
         owner_id: 18365890
         repo_id: 220359305
-    'softprops/action-gh-release@v3.0.3':
-        ref: 'v3.0.3'
-        commit: 'sha1-efb35369e0ad2afab669f228072c1b0d510eae64'
+    'softprops/action-gh-release@v3.0.4':
+        ref: 'v3.0.4'
+        commit: 'sha1-8a0cd651e5b2365bd640854a3fa5dfc70e4875f3'
         owner_id: 2242
         repo_id: 204253808
     'webfactory/ssh-agent@v0.10.0':
