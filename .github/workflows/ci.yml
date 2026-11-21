@@ -21,7 +21,7 @@ jobs:
       - name: Install GNAT and GPRbuild
         run: |
           sudo apt-get update
-          sudo apt-get install -y gnat gprbuild
+          sudo apt-get install -y gnat gprbuild libcurl4-openssl-dev
 
       - name: Build
         run: gprbuild -P bitfuckit.gpr
